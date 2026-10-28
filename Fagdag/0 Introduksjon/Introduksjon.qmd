@@ -1,0 +1,79 @@
+---
+title: "Bed-1304 Python lab"
+subtitle: "Introduksjon"
+date: last-modified
+date-format: "DD-MM-YYYY"
+echo: false
+warning: false
+format:
+  revealjs:
+    theme: dark
+    title-slide: false
+    slide-level: 2
+    width: 1280
+    height: 720
+    margin: 0.07
+    center: false
+    auto-stretch: false
+    slide-number: c/t
+    transition: fade
+    navigation-mode: linear
+    controls: true
+    progress: true
+    history: true
+    hash: true
+    embed-resources: true
+    preview-links: false
+    include-in-header:
+      text: |
+        <style>
+        .reveal { font-family: Arial, Helvetica, sans-serif; font-size: 30px; color: #f2f4f7; }
+        .reveal h1, .reveal h2, .reveal h3 { font-family: Arial, Helvetica, sans-serif; text-transform: none; font-weight: 600; color: #f2f4f7; }
+        .reveal h2 { font-size: 1.55em; margin-bottom: 0.65em; }
+        .reveal h3 { font-size: 1.05em; color: #8ad6d0; margin-bottom: 0.4em; }
+        .reveal p, .reveal li { line-height: 1.35; }
+        .reveal li { margin-bottom: 0.5em; }
+        .reveal strong { color: #8ad6d0; }
+        .reveal .columns { display: flex; gap: 2em; }
+        .reveal .column { min-width: 0; }
+        .reveal table { font-size: 0.8em; width: 100%; margin: 0.65em 0; }
+        .reveal table th { color: #8ad6d0; border-bottom: 2px solid #8ad6d0; }
+        .reveal table td, .reveal table th { padding: 0.55em 0.5em; vertical-align: top; }
+        .reveal .source { font-size: 0.52em; color: #bbc4d0; margin-top: 1.1em; }
+        .reveal .lead { font-size: 1.32em; line-height: 1.35; margin: 1em 0; }
+        .reveal .equation { font-family: Georgia, serif; font-size: 1.11em; padding: 0.55em 0; }
+        .reveal .small { font-size: 0.67em; }
+        .reveal a { color: #8ad6d0; }
+        .reveal .evidence { width: 100%; background: white; margin: 0; }
+        </style>
+---
+
+## Informasjon
+
+::: {.incremental}
+
+- **Hvem er vi?**
+
+- **Fire timer med arbeid og gjennomgang av python**
+
+- **Fokus på det vi vet dere trenger for eksamen**
+
+- **Vi er flere her, så ikke vær redd for å spørre om hjelp**
+
+- **Vi blir ikke ferdige i dag, men har også fire timer ekstra neste uke på tirsdag samme tidspunkt som nå**
+
+:::
+
+
+## Nedlasting av filer
+
+- Filene dere trenger kan lastes ned her:
+
+[https://github.com/DanielFabioG/BED-1304](https://github.com/DanielFabioG/BED-1304)
+
+::: {.incremental}
+
+- Da starter vi!
+
+:::
+

@@ -1,0 +1,510 @@
+---
+title: "Bed-1304 Python lab"
+subtitle: "Seminar 4 - Lister, oppslag og numpy"
+date: last-modified
+date-format: "DD-MM-YYYY"
+echo: false
+warning: false
+format:
+  revealjs:
+    theme: dark
+    title-slide: false
+    slide-level: 2
+    width: 1280
+    height: 720
+    margin: 0.07
+    center: false
+    auto-stretch: false
+    slide-number: c/t
+    transition: fade
+    navigation-mode: linear
+    controls: true
+    progress: true
+    history: true
+    hash: true
+    embed-resources: true
+    preview-links: false
+    include-in-header:
+      text: |
+        <style>
+        .reveal { font-family: Arial, Helvetica, sans-serif; font-size: 30px; color: #f2f4f7; }
+        .reveal h1, .reveal h2, .reveal h3 { font-family: Arial, Helvetica, sans-serif; text-transform: none; font-weight: 600; color: #f2f4f7; }
+        .reveal h2 { font-size: 1.55em; margin-bottom: 0.65em; }
+        .reveal h3 { font-size: 1.05em; color: #8ad6d0; margin-bottom: 0.4em; }
+        .reveal p, .reveal li { line-height: 1.35; }
+        .reveal li { margin-bottom: 0.5em; }
+        .reveal strong { color: #8ad6d0; }
+        .reveal .columns { display: flex; gap: 2em; }
+        .reveal .column { min-width: 0; }
+        .reveal table { font-size: 0.8em; width: 100%; margin: 0.65em 0; }
+        .reveal table th { color: #8ad6d0; border-bottom: 2px solid #8ad6d0; }
+        .reveal table td, .reveal table th { padding: 0.55em 0.5em; vertical-align: top; }
+        .reveal .source { font-size: 0.52em; color: #bbc4d0; margin-top: 1.1em; }
+        .reveal .lead { font-size: 1.32em; line-height: 1.35; margin: 1em 0; }
+        .reveal .equation { font-family: Georgia, serif; font-size: 1.11em; padding: 0.55em 0; }
+        .reveal .small { font-size: 0.67em; }
+        .reveal a { color: #8ad6d0; }
+        .reveal .evidence { width: 100%; background: white; margin: 0; }
+        </style>
+---
+
+## Last ned seminaroppgavene
+
+Gå inn på canvas eller [uit-bed-1304-h25.github.io](https://uit-bed-1304-h25.github.io) og finn "Oppgaver"
+
+Last ned "Seminar4_Lister_Dict_Numpy.ipynb"
+
+
+
+
+
+
+## Oppgave 1
+### Arbeide med *lister* - **Analyse av Økonomiske Indikatorer**
+
+I denne oppgaven skal du lage en liste som inneholder de månedlige inntektene til en husholdning over et år. Du skal deretter utføre ulike analyser på listen.
+
+1. Lag en liste som inneholder inntektene for hver måned, for eksempel: [30000, 32000, 31000, 33000, 34000, 35000, 36000, 37000, 38000, 39000, 40000, 41000].
+2. Beregn den totale inntekten for året.
+3. Finn den gjennomsnittlige månedlige inntekten.
+4. Finn den høyeste og laveste inntekten.
+
+
+::: notes
+Her skal du bruke lister og innebygde funksjoner som `sum`, `max`, og `min`.
+Men vi starter med et eksempel for oppgaven først
+:::
+
+
+## Eksempel for oppgave
+
+Vi lager en liste med høydene til Per, Pål og Ola.
+De er [180, 175, 170] cm høye.
+
+```{.python}
+hoyder = [180, 175, 170] # Høyder til Per, Pål og Ola
+```
+For å finne deres gjennomsnittlige høyde så tar vi summen av høydene og deler på antall personer.
+
+```{.python}
+gjennomsnitt_hoyde = sum(hoyder) / len(hoyder) # len(hoyder) gir oss lengden på listen, altså de 3
+print("Gjennomsnittlig høyde:", gjennomsnitt_hoyde)
+```
+For å så finne den høyeste og laveste høyden bruker vi de innebygde funksjonene `max` og `min`.
+
+```{.python}
+hoyeste_hoyde = max(hoyder)
+laveste_hoyde = min(hoyder)
+print("Høyeste høyde:", hoyeste_hoyde)
+print("Laveste høyde:", laveste_hoyde)
+```
+
+
+
+## 1 Gjennomgang
+
+```{.python code-line-numbers="|1-2|4-6|8-10|12-16|"}
+# 1.1 Lag en liste med inntekter
+inntekter = [30000, 32000, 31000, 33000, 34000, 35000, 36000, 37000, 38000, 39000, 40000, 41000]
+
+# 1.2 Beregn total inntekt
+total_inntekt = sum(inntekter)
+print("Total inntekt for året:", total_inntekt)
+
+# 1.3 Finn gjennomsnittlig inntekt
+gjennomsnitt_inntekt = total_inntekt / len(inntekter)
+print("Gjennomsnittlig månedlig inntekt:", gjennomsnitt_inntekt)
+
+# 1.4 Finn høyeste og laveste inntekt
+hoyeste_inntekt = max(inntekter)
+laveste_inntekt = min(inntekter)
+print("Høyeste inntekt:", hoyeste_inntekt)
+print("Laveste inntekt:", laveste_inntekt)
+```
+```{python}
+# 1.1 Lag en liste med inntekter
+inntekter = [30000, 32000, 31000, 33000, 34000, 35000, 36000, 37000, 38000, 39000, 40000, 41000]
+
+# 1.2 Beregn total inntekt
+total_inntekt = sum(inntekter)
+print("Total inntekt for året:", total_inntekt)
+
+# 1.3 Finn gjennomsnittlig inntekt
+gjennomsnitt_inntekt = total_inntekt / len(inntekter)
+print("Gjennomsnittlig månedlig inntekt:", gjennomsnitt_inntekt)
+
+# 1.4 Finn høyeste og laveste inntekt
+hoyeste_inntekt = max(inntekter)
+laveste_inntekt = min(inntekter)
+print("Høyeste inntekt:", hoyeste_inntekt)
+print("Laveste inntekt:", laveste_inntekt)
+```
+
+
+::: notes
+Her defineres en liste med inntekter for hver måned. Deretter brukes innebygde funksjoner for å beregne total, gjennomsnitt, høyeste og laveste inntekt. Hver beregning skrives ut med `print`.
+:::
+
+
+
+
+
+## Oppgave 2: Statistisk Analyse av Data med NumPy
+I denne oppgaven skal du bruke NumPy for å analysere en dataset som representerer månedlige utgifter til en husholdning.
+
+1. Importer NumPy.
+2. Lag en NumPy-array med månedlige utgifter, for eksempel: [20000, 21000, 22000, 23000, 24000, 25000, 26000, 27000, 28000, 29000, 30000, 31000].
+3. Beregn den totale utgiften.
+4. Finn gjennomsnittlige månedlige utgifter.
+5. Finn medianen av utgiftene.
+
+
+::: notes
+Tar igjen et eksempel først
+::: 
+
+
+
+
+## Eksempel for oppgave 2
+
+Numpy blir dere å bruke ganske mye så vi gjør samme analysen med NumPy.
+
+```{.python}
+import numpy as np #Denne er nå viktig. 
+# %pip install numpy #Dersom det kom error
+```
+
+Istedet for en liste så lager vi en "array".
+
+```{.python}
+hoyder = np.array([180, 175, 170]) # NumPy-"array" med høyder
+``` 
+Numpy har innebygd gjennomsnitt ved numpy.mean, eller np.mean siden vi importerte det som np.
+```{.python}
+gjennomsnitt_hoyde = np.mean(hoyder) # gjennomsnitt er innebygd i numpy
+print("Gjennomsnittlig høyde:", gjennomsnitt_hoyde)
+```
+
+For å finne median høyde bruker vi `np.median`.
+```{.python}
+median_hoyde = np.median(hoyder)
+print("Median høyde:", median_hoyde)
+```
+
+::: notes
+Array er mer effektive for beregninger enn lister, spesielt når det gjelder store datamengder. et eller annet med hvordan python og håndtering av data i minnet. 
+
+:::
+
+
+
+
+
+## 2 Gjennomgang
+
+```{.python code-line-numbers="|1-2|4-5|7-9|11-13|15-17"}
+# 2.1
+import numpy as np
+
+# 2.2 Lag en NumPy-array med utgifter
+utgifter = np.array([20000, 21000, 22000, 23000, 24000, 25000, 26000, 27000, 28000, 29000, 30000, 31000])
+
+# 2.3 Beregn total utgift
+total_utgift = np.sum(utgifter)
+print("Total utgift for året:", total_utgift)
+
+# 2.4 Finn gjennomsnittlige månedlige utgifter
+gjennomsnitt_utgift = np.mean(utgifter)
+print("Gjennomsnittlige månedlige utgifter:", gjennomsnitt_utgift)
+
+# 2.5 Finn medianen av utgiftene
+median_utgift = np.median(utgifter)
+print("Median av utgiftene:", median_utgift)
+```
+```{python}
+# 2.1
+import numpy as np
+
+# 2.2 Lag en NumPy-array med utgifter
+utgifter = np.array([20000, 21000, 22000, 23000, 24000, 25000, 26000, 27000, 28000, 29000, 30000, 31000])
+
+# 2.3 Beregn total utgift
+total_utgift = np.sum(utgifter)
+print("Total utgift for året:", total_utgift)
+
+# 2.4 Finn gjennomsnittlige månedlige utgifter
+gjennomsnitt_utgift = np.mean(utgifter)
+print("Gjennomsnittlige månedlige utgifter:", gjennomsnitt_utgift)
+
+# 2.5 Finn medianen av utgiftene
+median_utgift = np.median(utgifter)
+print("Median av utgiftene:", median_utgift)
+```
+
+
+
+
+## Oppgave 3: Bruke Dictionaries 
+I denne oppgaven skal du bruke dictionaries for å lagre og analysere data om inntekter og utgifter for forskjellige husholdninger.
+
+1. Lag en dictionary som inneholder inntektene og utgiftene til tre husholdninger. For eksempel:
+```{.python}
+        husholdninger = {
+            'Husholdning A': {'inntekt': 40000, 'utgift': 25000},
+            'Husholdning B': {'inntekt': 50000, 'utgift': 30000},
+            'Husholdning C': {'inntekt': 45000, 'utgift': 27000}
+        }
+
+```
+2. Beregn og skriv ut nettoinntekten (inntekt - utgift) for hver husholdning.
+3. Finn hvilken husholdning som har høyest nettoinntekt.
+
+
+::: notes
+Eksempel først
+:::
+
+
+
+
+
+## Eksempel for oppgave 3 Per, Pål og Ola for alder
+
+
+
+```{.python}
+personer = { # Vi lager en dictionary for høyde og alder
+    'Per': {'høyde': 180, 'alder': 30},
+    'Pål': {'høyde': 175, 'alder': 25},
+    'Ola': {'høyde': 170, 'alder': 35}
+}
+```
+
+. . . 
+
+
+Hvor mye har de vokst per år?
+
+```{.python}
+personer['Per']['høyde_per_år'] = personer['Per']['høyde'] / personer['Per']['alder'] 
+personer['Pål']['høyde_per_år'] = personer['Pål']['høyde'] / personer['Pål']['alder']
+personer['Ola']['høyde_per_år'] = personer['Ola']['høyde'] / personer['Ola']['alder']
+
+```
+
+. . . 
+
+
+
+```{.python}
+def mestvekst(item): # Hvem har vokst mest?
+    navn, verdier = item
+    return verdier['høyde_per_år'] # Returnerer bare høyde per år for hvert navn
+
+mest_vekst = max(personer.items(), key=mestvekst)
+print(f"{mest_vekst[0]} har vokst mest per år.")
+```
+```{python}
+personer = { # Vi lager en dictionary for høyde og alder
+    'Per': {'høyde': 180, 'alder': 30},
+    'Pål': {'høyde': 175, 'alder': 25},
+    'Ola': {'høyde': 170, 'alder': 35}
+}
+personer['Per']['høyde_per_år'] = personer['Per']['høyde'] / personer['Per']['alder'] 
+
+personer['Pål']['høyde_per_år'] = personer['Pål']['høyde'] / personer['Pål']['alder']
+
+personer['Ola']['høyde_per_år'] = personer['Ola']['høyde'] / personer['Ola']['alder']
+
+def mestvekst(item):
+    navn, verdier = item
+    return verdier['høyde_per_år'] #Returnerer bare høyde per år for hvert navn
+
+
+mest_vekst = max(personer.items(), key=mestvekst)
+print(f"{mest_vekst[0]} har vokst mest per år.")
+```
+
+. . .
+
+```{.python}
+print(personer.items()) # Derfor tokk vi mest_vekst[0] for bare navnet
+```
+```{python}
+print(personer.items()) # Derfor tokk vi mest_vekst[0] for bare navnet
+```
+
+
+
+::: notes 
+Først lager vi vår dictionary med høyde og alder for Per, Pål og Ola. 
+
+Beregner vi hvor mye de har vokst per år og lagrer det i dictionarien.
+
+
+
+Definerer en funksjon som brukes i max()
+mestvekst tar inn en (navn, verdier) fra personer.items(), og returnerer bare høyde_per_år.
+
+
+
+Bruker max med key-funksjon
+max(personer.items(), key=mestvekst) finner det elementet som har høyest høyde_per_år.
+Resultatet blir en (navn, verdier)-tuple. 
+('Pål', {'høyde': 175, 'alder': 25, 'høyde_per_år': 7.0})
+
+personer.items gir oss alt dette, 
+
+:::
+
+
+
+
+## 3 Gjennomgang
+
+
+
+```{.python code-line-numbers="|1|2-6|8-9|11-13"}
+# 1. Lag en dictionary med husholdninger
+husholdninger = {
+    'Husholdning A': {'inntekt': 40000, 'utgift': 25000},
+    'Husholdning B': {'inntekt': 50000, 'utgift': 30000},
+    'Husholdning C': {'inntekt': 45000, 'utgift': 27000}
+}
+
+# 2. Beregn nettoinntekten for hver husholdning
+print(f"""Nettoinntekt til Husholdning A er {husholdninger['Husholdning A']['inntekt'] - husholdninger['Husholdning A']['utgift']}""")
+
+# 3. Finn husholdningen med høyest nettoinntekt
+hoyest_nettovinn = max(husholdninger.items(), key=lambda x: x[1]['inntekt'] - x[1]['utgift'])
+print("Husholdning med høyest nettoinntekt:", hoyest_nettovinn[0])
+```
+
+. . .
+
+```{python}
+# 1. Lag en dictionary med husholdninger
+husholdninger = {
+    'Husholdning A': {'inntekt': 40000, 'utgift': 25000},
+    'Husholdning B': {'inntekt': 50000, 'utgift': 30000},
+    'Husholdning C': {'inntekt': 45000, 'utgift': 27000}
+}
+
+# 2. Beregn nettoinntekten for hver husholdning
+print(f"""Nettoinntekt til Husholdning A er {husholdninger['Husholdning A']['inntekt'] - husholdninger['Husholdning A']['utgift']}""")
+
+# 3. Finn husholdningen med høyest nettoinntekt
+hoyest_nettovinn = max(husholdninger.items(), key=lambda x: x[1]['inntekt'] - x[1]['utgift'])
+print("Husholdning med høyest nettoinntekt:", hoyest_nettovinn[0])
+```
+
+. . .
+
+
+
+```{.python}
+def skummel_lambda(item): # Uten lambda
+    navn, verdier = item
+    return verdier['inntekt'] - verdier['utgift']
+hoyest_nettovinn = max(husholdninger.items(), key=skummel_lambda)
+print("Husholdning med høyest nettoinntekt:", hoyest_nettovinn[0])
+```
+```{python}
+def skummel_lambda(item):
+    navn, verdier = item
+    return verdier['inntekt'] - verdier['utgift']
+hoyest_nettovinn = max(husholdninger.items(), key=skummel_lambda)
+print("Husholdning med høyest nettoinntekt:", hoyest_nettovinn[0])
+# [0] Siden vi ønsker navnet på husholdningen
+# [1] Hvis vi heller ønsket det neste elementet som vil være inntekt og utgift
+```
+
+
+
+::: notes
+Her opprettes en dictionary med inntekt og utgift for tre husholdninger. Nettoinntekt beregnes og skrives ut for én husholdning. Deretter brukes `max` med en lambda for å finne husholdningen med høyest nettoinntekt. 
+
+Lambda er bare en bare en liten funksjon uten funksjonsnavn.
+
+
+
+::: 
+
+## Oppgave 4: Bruke **Dictionaries og Funksjoner**
+Kombiner det du lærte om funksjoner, tidligere i kurset, for å løse oppgave 1 og 2 ved hjelp av *én funksjon*.
+
+```{.python}
+        husholdninger = {
+            'Husholdning A': {'inntekt': 40000, 'utgift': 25000},
+            'Husholdning B': {'inntekt': 50000, 'utgift': 30000},
+            'Husholdning C': {'inntekt': 45000, 'utgift': 27000}
+        }
+
+```
+1. Beregn og skriv ut nettoinntekten (inntekt - utgift) for hver husholdning.
+2. Finn hvilken husholdning som har høyest nettoinntekt.
+
+
+## 4 Gjennomgang
+
+
+```{.python code-line-numbers="|1-3|5-8|10-11|13-14|"}
+# Definer en funksjon for å beregne nettoinntekt og finne høyeste nettoinntekt
+def analyser_husholdninger(husholdninger):
+    nettoinntekter = {}
+
+    for navn, data in husholdninger.items():
+        nettoinntekt = data['inntekt'] - data['utgift']
+        nettoinntekter[navn] = nettoinntekt
+        print(f'Nettoinntekt til {navn} er {nettoinntekt} kr')
+
+    husholdning_med_hoyest_nettovinn = max(nettoinntekter, key=nettoinntekter.get)
+    print(f'Husholdningen med høyest nettoinntekt er {husholdning_med_hoyest_nettovinn} med {nettoinntekter[husholdning_med_hoyest_nettovinn]} kr')
+
+# 3. Kjør funksjonen
+analyser_husholdninger(husholdninger)    
+```
+```{python}
+# Definer en funksjon for å beregne nettoinntekt og finne høyeste nettoinntekt
+def analyser_husholdninger(husholdninger):
+    nettoinntekter = {}
+
+    for navn, data in husholdninger.items():
+        nettoinntekt = data['inntekt'] - data['utgift']
+        nettoinntekter[navn] = nettoinntekt
+        print(f'Nettoinntekt til {navn} er {nettoinntekt} kr')
+
+    husholdning_med_hoyest_nettovinn = max(nettoinntekter, key=nettoinntekter.get)
+    print(f'Husholdningen med høyest nettoinntekt er {husholdning_med_hoyest_nettovinn} med {nettoinntekter[husholdning_med_hoyest_nettovinn]} kr')
+
+# 3. Kjør funksjonen
+analyser_husholdninger(husholdninger)    
+```
+::: notes
+Her defineres en funksjon som itererer over dictionaryen, beregner og skriver ut nettoinntekt for hver husholdning, og finner den med høyest nettoinntekt.
+
+
+Hva skjer uten .get?
+
+Hvis du bare skriver max(nettoinntekter), så vil Python lete etter "største nøkkel".
+Hvis nettoinntekter = {"Per": 100, "Pål": 200}, så vil max(nettoinntekter) gi "Pål", ikke fordi 200 > 100, men fordi strengsammenligning sier "Pål" > "Per" alfabetisk.
+Altså: det sammenlignes på navn, ikke på verdier.
+
+Hva gjør .get?
+
+.get(key) er en metode på en dictionary. Den returnerer verdien som hører til en nøkkel.
+Eksempel:
+d = {"Per": 100, "Pål": 200}
+print(d.get("Per"))  # gir 100
+print(d.get("Pål"))  # gir 200
+
+Når du skriver key=nettoinntekter.get, så forteller du max at den ikke skal sammenligne nøklene direkte, men verdien som hører til nøkkelen.
+Så max sjekker:
+
+Per → 100
+
+Pål → 200
+→ Da vinner "Pål".
+
+:::

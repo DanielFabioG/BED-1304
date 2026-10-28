@@ -1,0 +1,429 @@
+---
+title: "Bed-1304 Python lab"
+subtitle: "Seminar 8 - SymPy"
+date: last-modified
+date-format: "DD-MM-YYYY"
+echo: false
+warning: false
+format:
+  revealjs:
+    theme: dark
+    title-slide: false
+    slide-level: 2
+    width: 1280
+    height: 720
+    margin: 0.07
+    center: false
+    auto-stretch: false
+    slide-number: c/t
+    transition: fade
+    navigation-mode: linear
+    controls: true
+    progress: true
+    history: true
+    hash: true
+    embed-resources: true
+    preview-links: false
+    include-in-header:
+      text: |
+        <style>
+        .reveal { font-family: Arial, Helvetica, sans-serif; font-size: 30px; color: #f2f4f7; }
+        .reveal h1, .reveal h2, .reveal h3 { font-family: Arial, Helvetica, sans-serif; text-transform: none; font-weight: 600; color: #f2f4f7; }
+        .reveal h2 { font-size: 1.55em; margin-bottom: 0.65em; }
+        .reveal h3 { font-size: 1.05em; color: #8ad6d0; margin-bottom: 0.4em; }
+        .reveal p, .reveal li { line-height: 1.35; }
+        .reveal li { margin-bottom: 0.5em; }
+        .reveal strong { color: #8ad6d0; }
+        .reveal .columns { display: flex; gap: 2em; }
+        .reveal .column { min-width: 0; }
+        .reveal table { font-size: 0.8em; width: 100%; margin: 0.65em 0; }
+        .reveal table th { color: #8ad6d0; border-bottom: 2px solid #8ad6d0; }
+        .reveal table td, .reveal table th { padding: 0.55em 0.5em; vertical-align: top; }
+        .reveal .source { font-size: 0.52em; color: #bbc4d0; margin-top: 1.1em; }
+        .reveal .lead { font-size: 1.32em; line-height: 1.35; margin: 1em 0; }
+        .reveal .equation { font-family: Georgia, serif; font-size: 1.11em; padding: 0.55em 0; }
+        .reveal .small { font-size: 0.67em; }
+        .reveal a { color: #8ad6d0; }
+        .reveal .evidence { width: 100%; background: white; margin: 0; }
+        </style>
+---
+
+
+## Last ned seminaroppgavene
+
+Gå inn på canvas eller [uit-bed-1304-h25.github.io](https://uit-bed-1304-h25.github.io) og finn "Oppgaver"
+
+Last ned "Seminar8_SymPy.ipynb"
+
+
+Installer Sympy dersom dere ikke har det fra før
+```{.python}
+%pip install sympy
+import sympy as sp
+```
+
+
+
+## Oppgave 1 Eksempel med 2 Ligninger løst for x
+
+
+$$
+f(x) = 300 - x, \quad g(x) = 4x - 10
+$$
+
+```{.python}
+# %pip install sympy dersom det ikke er gjort fra før
+import sympy as sp #importerer sympy
+x = sp.symbols('x') #Definerer x som et symbol
+f = 300 - x #definerer f(x)
+g = 4*x - 10 #definerer g(x)
+ligninger = sp.solve(f - g, x) #Løser ligningen f(x) - g(x) = 0 for x
+print(f"Løsning: {ligninger[0]}") #[0] siden sp.solve returnerer en liste som kan ha flere løsninger
+```
+```{python}
+import sympy as sp
+x = sp.symbols('x')
+f = 300 - x
+g = 4*x - 10
+ligninger = sp.solve(f - g, x)
+print(f"Løsning: {ligninger[0]}") #[0] siden sp.solve returnerer en liste
+```
+
+
+
+
+## Oppgave 1 LF
+
+$$
+D(p) = 100 - 2p, \quad S(p) = 3p - 20
+$$
+
+```{.python}
+p = sp.symbols('p')
+ettersporsel = 100 - 2*p
+tilbud = 3*p - 20
+
+likevekt = sp.solve(ettersporsel - tilbud, p)
+print(f"Likevektspris: {likevekt[0]}")
+```
+```{python}
+p = sp.symbols('p')
+ettersporsel = 100 - 2*p
+tilbud = 3*p - 20
+
+likevekt = sp.solve(ettersporsel - tilbud, p)
+print(f"Likevektspris: {likevekt[0]}")
+```
+
+
+
+
+
+
+
+
+
+
+## Oppgave 2 Eksempel 
+
+```{.python}
+from matplotlib import pyplot as plt
+import numpy as np
+plt.figure(figsize=(5, 3)) #størrelse så den for plass i presentasjonen
+x = np.linspace(0, 70, 100) #100 punkter mellom 0 og 70 
+plt.plot(x, 300 - x, label='f(x) = 300 - x') #plott f(x)
+plt.plot(x, 4*x - 10, label='g(x) = 4x - 10') #plott g(x)
+
+plt.scatter(ligninger[0], 300 - ligninger[0], label='Løsning', color="green") #Setter et punkt der de krysser hverandre
+plt.vlines(ligninger[0], 0, 300 - ligninger[0], colors='green', linestyles='dashed') #og en linje opp
+
+plt.legend(loc='center left')#så den ikke dekker løsningen
+plt.grid() # Greit for å vise x og y nivåer
+plt.show() #"Best practice" for å vise plottet
+``` 
+
+```{python}
+from matplotlib import pyplot as plt
+import numpy as np
+plt.figure(figsize=(5, 3)) #størrelse så den for plass i presentasjonen
+x = np.linspace(0, 70, 100) #100 punkter mellom 0 og 70 
+plt.plot(x, 300 - x, label='f(x) = 300 - x') #plott f(x)
+plt.plot(x, 4*x - 10, label='g(x) = 4x - 10') #plott g(x)
+
+plt.scatter(ligninger[0], 300 - ligninger[0], label='Løsning', color="green") #Setter et punkt der de krysser hverandre
+plt.vlines(ligninger[0], 0, 300 - ligninger[0], colors='green', linestyles='dashed') #og en linje opp
+
+plt.legend(loc='center left')#så den ikke dekker løsningen
+plt.grid() # Greit for å vise x og y nivåer
+plt.show() #"Best practice" for å vise plottet
+``` 
+
+
+## Oppgave 2 LF kode
+```{.python}
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Definer funksjonene for etterspørsel og tilbud
+def D(p):
+    return 100 - 2*p
+
+def S(p):
+    return 3*p - 20
+
+# Lage et utvalg av priser fra 0 til 50
+p_values = np.linspace(0, 50, 500)
+
+# Beregn etterspørsel og tilbud
+D_values = D(p_values)
+S_values = S(p_values)
+
+# Finn likevektspunktet (fra oppgave 1, der D = S)
+# Vi finner at likevekt er p = 24
+p_eq = 24
+q_eq = D(p_eq)  # eller S(p_eq) - begge gir samme resultat
+
+# Plotte kurvene
+plt.plot(p_values, D_values, label="Etterspørsel D(p) = 100 - 2p", color="blue")
+plt.plot(p_values, S_values, label="Tilbud S(p) = 3p - 20", color="red")
+
+# Markere likevektspunktet på plottet
+plt.scatter(p_eq, q_eq, color="green", zorder=5)
+plt.text(p_eq + 1, q_eq + 2, f'Likevekt: p={p_eq}, q={q_eq}', color="green")
+
+# Akser og titler
+plt.xlabel('Pris (p)')
+plt.ylabel('Mengde (q)')
+plt.title('Marked: Etterspørsel og Tilbud')
+plt.hlines(q_eq,0, p_eq, color='black',linewidth=1.5, linestyles='dashed')
+plt.vlines(p_eq,0,q_eq, color='black',linewidth=1.5, linestyles='dashed')
+plt.ylim(0, 120)
+plt.xlim(0, 50)
+plt.grid(True)
+plt.legend()
+
+# Vise grafen
+plt.show()
+```
+## Oppgave 2 LF Figur
+
+```{python}
+# Definer funksjonene for etterspørsel og tilbud
+def D(p):
+    return 100 - 2*p
+
+def S(p):
+    return 3*p - 20
+
+# Lage et utvalg av priser fra 0 til 50
+p_values = np.linspace(0, 50, 500)
+
+# Beregn etterspørsel og tilbud
+D_values = D(p_values)
+S_values = S(p_values)
+
+# Finn likevektspunktet (fra oppgave 1, der D = S)
+# Vi finner at likevekt er p = 24
+p_eq = 24
+q_eq = D(p_eq)  # eller S(p_eq) - begge gir samme resultat
+
+# Plotte kurvene
+plt.plot(p_values, D_values, label="Etterspørsel D(p) = 100 - 2p", color="blue")
+plt.plot(p_values, S_values, label="Tilbud S(p) = 3p - 20", color="red")
+
+# Markere likevektspunktet på plottet
+plt.scatter(p_eq, q_eq, color="green", zorder=5)
+plt.text(p_eq + 1, q_eq + 2, f'Likevekt: p={p_eq}, q={q_eq}', color="green")
+
+# Akser og titler
+plt.xlabel('Pris (p)')
+plt.ylabel('Mengde (q)')
+plt.title('Marked: Etterspørsel og Tilbud')
+plt.hlines(q_eq,0, p_eq, color='black',linewidth=1.5, linestyles='dashed')
+plt.vlines(p_eq,0,q_eq, color='black',linewidth=1.5, linestyles='dashed')
+plt.ylim(0, 120)
+plt.xlim(0, 50)
+plt.grid(True)
+plt.legend()
+
+# Vise grafen
+plt.show()
+```
+
+
+
+## 
+
+### Oppgave 3a Ekspandere uttrykk. `sp.expand` til å utvide uttrykket $(x+y)^2$ til $x^2 + 2xy + y^2$
+```{.python .fragment}
+x, y, z = sp.symbols('x y z') #Definerer symboler
+expr = (x+y)**2 # Skriver uttrykket vårt
+
+new_expr = sp.expand(expr) # Utvider uttrykket
+new_expr
+```
+```{python}
+x, y, z = sp.symbols('x y z') #Definerer symboler
+expr = (x+y)**2 # Skriver uttrykket vårt
+new_expr = sp.expand(expr) # Utvider uttrykket
+new_expr
+```
+### Oppgave 3b - Faktorisere uttrykket $x^2 + 2xy + y^2$
+
+
+```{.python .fragment}
+org_expr = sp.factor(new_expr)
+org_expr
+```
+```{python}
+org_expr = sp.factor(new_expr)
+org_expr
+```
+
+Altså når vi vil få vondt så bruker vi sp.expand, når ikke vil det så brukes sp.simplify eller sp.factor for forenkling
+
+::: notes
+Trenger ikke å kjøre den koden om "from sympy import symbols, expand, factor"
+:::
+
+
+## Oppgave 4 Cobb-Douglas
+$$f(K, L) = A \cdot K^{\alpha} \cdot L^{\beta}$$
+hvor,
+- $f$ er total produksjon
+- $K$ er mengden kapital (for eksempel maskiner, utstyr, bygninger)
+- $L$ er mengden arbeidskraft (antall arbeidere eller arbeidstimer)
+- $A$ er et mål på produktivitet
+- $\alpha$ og $\beta$ er eksponenter som viser elastisiteten til henholdsvis kapital og arbeidskraft. De representerer hvor stor andel av produksjonen som kommer fra kapital og arbeidskraft.
+
+Typisk er at $\alpha + \beta = 1$, som som indikerer konstante skalautbytter. Dette betyr at hvis du fordobler både kapital og arbeidskraft, vil produksjonen også fordobles.
+
+##
+### Oppgave 4.1
+I økonomi og økonometri er **Cobb-Douglas** sin produksjonsfunksjon ofte brukt, og i denne deloppgaven skal du lage en funksjon som definerer Cobb-Douglas funksjonen, hvor vi setter $A=1$, $\alpha = 0.5$ og $\beta = 0.5$.
+
+```{.python .fragment}
+A = 1
+alpha, beta = 0.5, 0.5
+def cobb_douglas(K, L, A, alpha, beta):
+    return A * (K ** alpha) * (L ** beta)
+```
+```{python}
+A = 1
+alpha, beta = 0.5, 0.5
+def cobb_douglas(K, L, A, alpha, beta):
+    return A * (K ** alpha) * (L ** beta)
+```
+
+### Oppgave 4.2 Sympy
+Finn den partiell deriverte av Cobb-Douglas funksjonen (mhp $K$), dette kalles *marginale produkt av kapital (MPK)*. 
+
+Kommenter resultatet. Ser vi noe spesielt med MPK i forhold til Cobb-Douglas funksjonen?
+
+## Oppgave 4.2 LF
+
+```{.python .fragment}
+#Definer symboler for kapital (K), arbeidskraft (L), og konstanter A, alpha, beta
+A, alpha, beta, K, L = sp.symbols('A alpha beta K L')
+
+#Finn partielle deriverte med hensyn til kapital (K)
+dY_dK = sp.diff(cobb_douglas(K, L, A, alpha, beta), K)
+dY_dK
+```
+
+
+```{python}
+# Definer symboler for kapital (K), arbeidskraft (L), og konstanter A, alpha, beta
+A, alpha, beta, K, L = sp.symbols('A alpha beta K L')
+
+# Finn partielle deriverte med hensyn til kapital (K)
+dY_dK = sp.diff(cobb_douglas(K, L, A, alpha, beta), K)
+dY_dK
+```
+
+
+Hvis vi kalles Cobb-Douglas funksjonen for $f(K, L)$, og så ser vi på den partiell-deriverte av Cobb-Douglas funksjonen, også kalt MLP, som vi fant over ser vi at: $MPK = \frac{AK^{\alpha}L^{\beta}\alpha}{K}$
+
+kan skrives som $MPK = \alpha \cdot \frac{f(K, L)}{K}$
+
+
+
+
+
+::: notes
+MPK er det "marginale produktet av kapital" stygg måte å si "hva skjer hvis du endrer kapitalen litt".
+Når du øker kapitalen litt, så øker produksjonen også, men ikke like mye som før. Jo mer kapital du allerede har jo mindre vil økningen i produksjon være. alphaen bestemmer bare hvor stor denne effekten er.
+
+MPK betyr hvor mye produksjonen øker når du legger til litt mer kapital. Jo mer kapital du har fra før, jo mindre ekstra får du ut av å øke den litt til.
+:::
+
+
+
+
+## Oppgave 4.3 Hvordan utvikler MPK seg, hvis $K$ øker? 
+Hvis vi holder $L$, $A$, $\alpha$ og $\beta$ konstant.  Velg selv en passende måte å presentere dette på. Beskriv hva dette betyr for den totale produksjonen til Cobb-Douglas funksjonen, $f(K, L)$.
+
+Du bestemmer selv verdiene på $L$, $A$, $\alpha$ og $\beta$ (men sørg for $0 < \alpha < 1$, $0 < \beta < 1$ og $\alpha + \beta =1$).
+
+. . .
+
+```{python}
+# Definerer en funksjon for MPK basert på derivert av Cobb-Douglas
+def MPK(K, L=10, A=1, alpha=0.5, beta=0.5):
+    return (A * alpha * K**(alpha) * L**beta)/K
+
+# Verdier for K
+K_values = np.linspace(1, 200, 100)
+
+# Beregn MPK for hver verdi av K
+MPK_values = MPK(K_values)
+
+# Plotter MPK som funksjon av K
+plt.figure(figsize=(6, 3))
+plt.plot(K_values, MPK_values, label='MPK (marginalprodukt av kapital)')
+plt.title('Utviklingen av MPK når K øker, L=10, A=1, \u03B1=0.5, \u03B2=0.5')
+plt.xlabel('Kapital (K)')
+plt.ylabel('MPK')
+plt.grid(True)
+plt.legend()
+plt.show()
+```
+
+
+
+::: notes
+Her har vi plottet $MPK$, som en funksjon av kapital $K$. At MPK, den partiell-deriverte av $f(K, L)$ (med hensyn på $K$), alltid er positiv betyr at produksjonen $f$ alltid vil øke når kapitalmengden $K$ øker. Gitt at vi holder alle andre variabler konstante, altså $L$, $A$, $\alpha$ og $\beta$. 
+
+Selv om marginalproduktet av kapital avtar når $K$ øker (som plottet over viser), vil det aldri bli negativt. Skal vi tolke dette i en mer økonomisk forståelse av produksjon, kan man si at i en typisk produksjonsprosess vil mer kapital (som f.eks. maskiner, teknologi osv.) bidra til økt produksjon, men etter hvert vil denne økningen ha mindre og mindre effekt.
+::: 
+
+## Oppgave 4.3 figurkode
+
+```{.python}
+# Definerer en funksjon for MPK basert på derivert av Cobb-Douglas
+def MPK(K, L=10, A=1, alpha=0.5, beta=0.5):
+    return (A * alpha * K**(alpha) * L**beta)/K
+
+# Verdier for K
+K_values = np.linspace(1, 200, 100)
+
+# Beregn MPK for hver verdi av K
+MPK_values = MPK(K_values)
+
+# Plotter MPK som funksjon av K
+plt.figure(figsize=(6, 3))
+plt.plot(K_values, MPK_values, label='MPK (marginalprodukt av kapital)')
+plt.title('Utviklingen av MPK når K øker, L=10, A=1, \u03B1=0.5, \u03B2=0.5')
+plt.xlabel('Kapital (K)')
+plt.ylabel('MPK')
+plt.grid(True)
+plt.legend()
+plt.show()
+```
+
+
+::: notes
+Her har vi plottet $MPK$, som en funksjon av kapital $K$. At MPK, den partiell-deriverte av $f(K, L)$ (med hensyn på $K$), alltid er positiv betyr at produksjonen $f$ alltid vil øke når kapitalmengden $K$ øker. Gitt at vi holder alle andre variabler konstante, altså $L$, $A$, $\alpha$ og $\beta$. 
+
+Selv om marginalproduktet av kapital avtar når $K$ øker (som plottet over viser), vil det aldri bli negativt. Skal vi tolke dette i en mer økonomisk forståelse av produksjon, kan man si at i en typisk produksjonsprosess vil mer kapital (som f.eks. maskiner, teknologi osv.) bidra til økt produksjon, men etter hvert vil denne økningen ha mindre og mindre effekt.
+::: 

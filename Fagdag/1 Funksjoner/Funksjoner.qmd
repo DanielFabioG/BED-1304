@@ -1,0 +1,698 @@
+---
+title: "Bed-1304 Python lab"
+subtitle: "Seminar 3 - Funksjoner"
+date: last-modified
+date-format: "DD-MM-YYYY"
+echo: false
+warning: false
+format:
+  revealjs:
+    theme: dark
+    title-slide: false
+    slide-level: 2
+    width: 1280
+    height: 720
+    margin: 0.07
+    center: false
+    auto-stretch: false
+    slide-number: c/t
+    transition: fade
+    navigation-mode: linear
+    controls: true
+    progress: true
+    history: true
+    hash: true
+    embed-resources: true
+    preview-links: false
+    include-in-header:
+      text: |
+        <style>
+        .reveal { font-family: Arial, Helvetica, sans-serif; font-size: 30px; color: #f2f4f7; }
+        .reveal h1, .reveal h2, .reveal h3 { font-family: Arial, Helvetica, sans-serif; text-transform: none; font-weight: 600; color: #f2f4f7; }
+        .reveal h2 { font-size: 1.55em; margin-bottom: 0.65em; }
+        .reveal h3 { font-size: 1.05em; color: #8ad6d0; margin-bottom: 0.4em; }
+        .reveal p, .reveal li { line-height: 1.35; }
+        .reveal li { margin-bottom: 0.5em; }
+        .reveal strong { color: #8ad6d0; }
+        .reveal .columns { display: flex; gap: 2em; }
+        .reveal .column { min-width: 0; }
+        .reveal table { font-size: 0.8em; width: 100%; margin: 0.65em 0; }
+        .reveal table th { color: #8ad6d0; border-bottom: 2px solid #8ad6d0; }
+        .reveal table td, .reveal table th { padding: 0.55em 0.5em; vertical-align: top; }
+        .reveal .source { font-size: 0.52em; color: #bbc4d0; margin-top: 1.1em; }
+        .reveal .lead { font-size: 1.32em; line-height: 1.35; margin: 1em 0; }
+        .reveal .equation { font-family: Georgia, serif; font-size: 1.11em; padding: 0.55em 0; }
+        .reveal .small { font-size: 0.67em; }
+        .reveal a { color: #8ad6d0; }
+        .reveal .evidence { width: 100%; background: white; margin: 0; }
+        </style>
+---
+
+
+
+## Funksjon
+
+$$
+f(x) = 2x +5
+$$
+
+I python ville dette vært
+
+```{.python}
+def f(x):
+    return 2 * x + 5
+```
+
+. . .
+
+
+```{python}
+import numpy as np
+from matplotlib import pyplot as plt
+
+def f(x):
+    return 2 * x + 5
+x = np.linspace(-5, 10, 100)
+y = f(x)
+
+plt.plot(x, y)
+plt.xlabel("x")
+plt.ylabel("f(x)")
+plt.axhline(0, color='black', lw=1, ls='--')
+plt.axvline(0, color='black', lw=1, ls='--')
+plt.grid()
+plt.show();
+```
+
+
+::: notes
+
+Antar de fleste vet hva en funksjon fra matematikken er. Så her ser vi hvordan denne funksjonen kan skrives i python.
+
+Return er for at den faktisk skal gi oss et resultat tilbake når vi kaller på funksjonen. Sett x = 5 så får du da 10+5 altså 15.
+
+Gjør vi dette med x fra -5 til 15 så får vi denne grafen
+
+::: 
+
+## Oppgave 1
+
+*Nåverdi* (eng: *present value*) er viktig i økonomi, og bruke til å beregne verdien i dag av en fremtidig sum penger. Formelen:
+$$PV = \frac{FV}{(1+r)^n}$$
+
+Der $FV$ er fremtidig verdi (Future Value), $r$ er rente per periode, og $n$ er antall perioder
+
+
+Lag en funksjon ```present_value(fv, r, n)``` som tar inn de tre parameterne og returnerer nåverdien. Test funksjonen for noen vilkårlige verdier. For å få eksponent i python så brukes **  
+
+
+
+::: notes
+Nåverdi handler om å finne ut hva en sum penger i fremtiden er verdt i dag.
+
+Viktig for økonomiske valg, som investering, lån, eller spare penger.
+
+Antar de fleste vil være enig i at 1000kr i dag har en annen verdi enn 1000kr om 10 år. 
+
+Formelen for nåverdi eller "PV" her viser denne 1000lappen delt på 1 pluss en rente og summen er opphøyd i en viss tid.
+
+Får du 10% rente på sparekonto så vil 1000kr i dag vokse til 1100kr om ett år så om du skulle lånt noen 1000kr så ville du sikkert ikke godtatt å bare få 1000kr om et år.
+
+Formelen tar hensyn til både rente og antall år. Jo høyere rente eller jo lengre tid, jo mindre blir nåverdien.
+
+
+
+Eksempel: Hvis du får 10 000 kr om fem år, hvor mye er det verdt i dag hvis renten er 5%? Da bruker vi denne funksjonen til å regne ut svaret.
+
+I denne oppgaven skal dere lage en funksjonen i python som gjør denne beregningen for oss. Dere må definere en funksjon som tar inn tre argumenter: fremtidig verdi (FV), rente (r), og antall perioder (n). Funksjonen skal deretter returnere nåverdien (PV).
+:::
+
+## 1a Gjennomgang
+
+$$PV = \frac{FV}{(1+r)^n}$$
+
+```{.python code-line-numbers="|1-3|5-8|10-11"}
+def present_value(fv, r, n):
+    pv = fv / (1 + r) ** n
+    return pv
+
+# Test av funksjonen med noen eksempler
+fremtidig_verdi = 10000  # 10 000 kr
+rente = 0.05  # 5% rente per år
+antall_år = 5  # 5 år
+
+resultat = present_value(fremtidig_verdi, rente, antall_år)
+print(f"Nåverdien av {fremtidig_verdi} kr om {antall_år} år med {rente*100}% rente er: {resultat:.2f} kr")
+
+```
+
+. . .
+
+```{python}
+def present_value(fv, r, n):
+    pv = fv / (1 + r) ** n
+    return pv
+
+# Test av funksjonen med noen eksempler
+fremtidig_verdi = 10000  # 10 000 kr
+rente = 0.05  # 5% rente per år
+antall_år = 5  # 5 år
+
+resultat = present_value(fremtidig_verdi, rente, antall_år)
+print(f"Nåverdien av {fremtidig_verdi} kr om {antall_år} år med {rente*100}% rente er: {resultat:.2f} kr")
+```
+
+::: notes
+Så først defineres funksjonen. med 3 inputs fv, r og n. 
+
+Beregnes ved `pv = fv / (1 + r) ** n`, og returnerer pv
+
+
+
+Så defineres noen verdier
+
+Og til slutt lagres dette som en variabel og printes ut.
+
+Kunne også bare skrevet print(present_value) med parantes med de verdiene. 
+
+
+
+
+printen ved f strengen har denne .2f som bare forteller python at vi vil ha 2 desimaler. Vi kan sette variabler direkte inn i strengen, og `.2f` betyr at vi vil ha 2 desimaler.
+
+
+:::
+
+
+
+# Oppgave 1
+Return on Investment (ROI) er en måling som brukes til å evaluere effektiviteten av en investering. Formelen er:
+
+$$𝑅𝑂𝐼 = \frac{\text{(Gevinst fra investering) -  (Kostnad ved investering)}}{\text{(Kostnad ved investering)}}$$
+
+Lag en funksjon ```roi(gain, cost)``` som beregner ROI. Test funksjonen for noen vilkårlige verdier.
+
+::: notes
+
+ROI er gevinsten fra investeringen. 
+:::
+
+
+## 1b Gjennomgang
+
+$𝑅𝑂𝐼 = \frac{\text{(Gevinst fra investering) -  (Kostnad ved investering)}}{\text{(Kostnad ved investering)}}$
+
+```{.python code-line-numbers="|1-2|3-6|8-9"}
+def roi(gain, cost):
+    return (gain - cost) / cost
+
+# Test funksjonen med et eksempel
+gain = 15000  # Gevinst fra investering
+cost = 10000  # Kostnad ved investering
+
+roi_value = roi(gain, cost)
+print(f"Avkastning på investering: {roi_value:.2%}")
+```
+
+. . .
+
+```{python}
+def roi(gain, cost):
+    return (gain - cost) / cost
+
+# Test funksjonen med et eksempel
+gain = 15000  # Gevinst fra investering
+cost = 10000  # Kostnad ved investering
+
+roi_value = roi(gain, cost)
+print(f"Avkastning på investering: {roi_value:.2%}")
+```
+
+
+. . .
+
+
+
+### Hvis vi startet med 10000 på konto og etter 20 år er dette 110000. Hva er årlig avkastning?
+
+
+$\frac{110000-10000}{20} = 50\%$ men $10000\cdot1.5^{20}$ er over 33mill.
+
+
+
+::: notes
+
+Starter med definere funksjonen igjen med gevinst og kostnad. returnerer bare prosentvis avkastning. 
+
+1. **Kompakt funk
+
+.2%` i f-strengen konverterer automatisk desimaltallet til prosent med 2 desimaler. Så 0.5 blir "50.00%".
+
+Med gevinst på 15 000 kr og kostnad på 10 000 kr: (15 000 - 10 000) / 10 000 = 5 000 / 10 000 = 0.5 = 50% avkastning.
+
+
+Men som vi ser med tid, så vil ikke denne funksjonen fortelle oss årlig avkastning. 
+:::
+
+
+
+## Oppgave 1c
+Den gjennomsnittlige årlige avkastningen (Compound Annual Growth Rate, CAGR) brukes til å måle avkastningen på en investering over tid, med tanke på effekten av rentesrente. Formelen er:
+
+$$\text{CAGR} = \left(\frac{\text{EV}}{\text{BV}} \right)^{\frac{1}{n}} - 1$$
+
+Der $EV$ er sluttverdien (Ending Value), $BV$ er startverdien (Beginning Value)
+og $n$ er antall år
+
+Lag en funksjon ```cagr(ev, bv, n)``` som beregner CAGR.W
+
+
+
+
+::: notes
+CAGR (Compound Annual Growth Rate) er mer avansert enn ROI fordi den tar hensyn til tid og sammensatt vekst. Vi har da med renters rente effekten. 
+
+Hvis en investering vokser fra 10 000 til 110 000 kr på 20 år, kan man fristes til å si det er (1000% / 20 =) 50% per år. Men det ville bety 10 000 × 1.5^20 = over 33 millioner kr!
+
+CAGR tar hensyn til at avkastningen reinvesteres hvert år. Det er som å spørre: "Hvis jeg hadde fått den samme prosentvise avkastningen hvert år, hva ville den vært?"
+
+
+Vi finner forholdet mellom sluttverdi og startverdi (EV/BV), tar den n-te roten (^1/n), og trekker fra 1 for å få vekstraten.
+
+:::
+
+## 1c Gjennomgang 
+$$\text{CAGR} = \left(\frac{\text{EV}}{\text{BV}} \right)^{\frac{1}{n}} - 1$$
+
+
+```{.python code-line-numbers="|1-3|4-8|9-11"}
+def cagr(ev, bv, n):
+    return (ev / bv)**(1 / n) - 1
+
+# Test funksjonen med et eksempel
+ev = 110000  # Sluttverdi
+bv = 10000  # Startverdi
+n = 20       # Antall år
+
+cagr_value = cagr(ev, bv, n)
+print(f"Gjennomsnittlig årlig avkastning (CAGR): {cagr_value:.3%}")
+```
+
+. . .
+
+
+```{python}
+def cagr(ev, bv, n):
+    return (ev / bv)**(1 / n) - 1
+
+# Test funksjonen med et eksempel
+ev = 110000  # Sluttverdi
+bv = 10000  # Startverdi
+n = 20       # Antall år
+
+cagr_value = cagr(ev, bv, n)
+print(f"Gjennomsnittlig årlig avkastning (CAGR): {cagr_value:.3%}")
+```
+
+::: notes
+
+`def cagr(ev, bv, n):` - Tar tre parametere: ending value, beginning value, og antall år.
+
+End value delt på beginning value, opphøyd i nte roten -1 så vi har vekstraten.  `(ev / bv)**(1 / n) - 1` 
+   - Først deler vi sluttverdi på startverdi (ev/bv) for å få totalt vekstforhold
+   - Så tar vi 1/n-potensen (n-te roten) for å finne årlig vekstfaktor
+   - Til slutt trekker vi fra 1 for å få vekstraten
+
+
+
+- 110 000 / 10 000 = 10 (investeringen ble 10 ganger større)
+- 10^(1/20) = 1.123 (årlig vekstfaktor)
+- 1.123 - 1 = 0.123 = 12.3% årlig avkastning
+
+
+
+Altså 10 000 × 1.127^20 er sånn ca 110 000
+
+:::
+
+
+
+
+
+## Før oppgave 2. Append
+
+```{python}
+#| echo: true
+Min_liste = []                # Definerer en tom liste
+
+Min_liste.append(5)           # Legger til tallet 5 i lista
+
+print(Min_liste)               # Printer ut lista
+```
+
+
+```{python}
+#| echo: true
+for i in range(1, 6):        # Lager en liste av lengde 5
+    Min_liste.append(i)       # Bruker innebygde funksjonen 'append' til å legge til bakerst i lista
+print(Min_liste)               # Printer ut lista
+
+```
+
+### Random
+
+```{python}
+#| echo: true
+import random
+Tilfeldig_liste = []
+
+for i in range(1, 6):        # Lager en liste av lengde 5
+    Tilfeldig_liste.append(random.randint(1, 10))  # Tilfeldig heltall mellom 1 og 10. 
+print(Tilfeldig_liste)
+
+```
+
+::: notes
+I tilfelle noen misset forelesing så går jeg raskt igjennom append og random. 
+
+Klammeparantesene lager tom liste. .append betyr at du legger til noe bakerst i den listen. 
+
+
+Dette kan også gjøres med for loops. Altså for tallene 1 til 5 så legger vi til i lista.
+
+
+Med random så kan vi generere tilfeldige tall.
+
+`import random` gir oss tilgang til tilfeldighets-funksjoner
+
+`random.randint(1, 10)` gir tilfeldige heltall mellom 1 og 10 (begge inkludert)
+
+:::
+
+
+
+## Oppgave 2a
+Lag en funksjon som lager en liste med $n$ **tilfeldige** verdier mellom $1$ og $k$. Funksjonen skal altså ha $2$ parameter ($n$ og $k$). 
+Her vil du få bruk for biblioteket 'random', det henter du ved å skrive:
+```{.python}
+import random
+```
+
+Test funksjonen for $n = 15$ og $k=50$.
+
+Hint:
+* Skriv pseudo-kode før du går igang.
+* Sjekk først hva og hvordan ```random.randint(1, 10))``` fungerer.
+* Man kan bruke for-løkke og ```append``` funksjonen for å få dette til.
+* Google er din venn.
+
+
+
+::: notes
+
+Forklare pseudokode.
+Man skriv ikke kode, men beskrive hva koden gjør i naturlig språk.
+Lager en funksjon som lager 2x + 5. "Hvis man skal kode uten å kode"
+
+Prøve å "forklare en kodesnipp" de ordene man bruker til å forklare koden er basically en pseudokode. er ingen programmer som kan kjøre en pseudokode. later som man forklare kode til en som kan kode, så skal han forklare koden til deg. absically bare en forklaring av hvordan en kode skal funke, men du lager den ikke selv. på en måte som en plan, og det er derfor han han skriv i starten lag pseudokode først, siden pseudokode er på en måte kordan du tenker hvordan du skal løse oppgaven så skal du faktisk prøve å løse den og da kan du sikkert se på pseudokoden for å huske kordan du skulle løse den
+::: 
+
+
+
+
+## 2a Gjennomgang
+
+
+```{.python code-line-numbers="|1|3-8|8-10|"}
+import random
+
+def generate_random_list(n, k):
+    random_list = []                                # Definerer en tom liste
+    for i in range(1, n+1):                         # Lager en liste av lengde n, slik oppgaven ba om
+        random_list.append(random.randint(1, k))    # Bruker innebygde funksjonen 'append' til å legge til et tilfeldig tall mellom 1 og k. Bruker også random biblioteket.
+    
+    return random_list
+
+generate_random_list(15, 50) # Teste funksjonen for n = 15 og k = 50
+
+
+```
+
+. . .
+
+```{python}
+import random
+
+def generate_random_list(n, k):
+    random_list = []                                # Definerer en tom liste
+    for i in range(1, n+1):                         # Lager en liste av lengde n, slik oppgaven ba om
+        random_list.append(random.randint(1, k))    # Bruker innebygde funksjonen 'append' til å legge til et tilfeldig tall mellom 1 og k. Bruker også random biblioteket.
+    
+    return random_list
+
+generate_random_list(15, 50) # Teste funksjonen for n = 15 og k = 50
+
+
+```
+
+::: notes
+Her lages alt i en funksjon. for i in range 1, n+1 lar os velge hvor mange tall vi vil ha i lista. random.randint(1, k) lager et tilfeldig tall mellom 1 og k.
+Vi velger da både hvor lang liste med n, og hvilke maks tall ved k. 
+:::
+
+
+## Oppgave 2b
+Lag en funksjon som som itererer gjennom en liste (som du lager med funksjonen fra oppgave 2a) - og sjekker om verdiene i lista er større eller lik enn en verdi $b$. Hvis den er større, legg tallet i en ny liste. Returner denne lista.
+
+Lag en funksjon med tre parametere ($b$, $n$ og $k$) og test funksjonen.
+
+Hint:
+* Her skal du lage en funksjon som bruker funksjonen fra 2a **inne** i funksjonen.
+* Husk å lag pseudo-kode, før du setter igang.
+* Man kan bruke for-løkke og ```append``` funksjonen for å få dette til.
+* Søk også opp hvordan ```if``` og ```else``` fungerer i Python.
+
+
+::: notes
+Ord som iterering, er bare at du går fra en til den neste. 
+
+I analyse vil vi ofte bare se på data som oppfyller visse kriterier - for eksempel bedrifter med omsetning over en viss grense, eller aksjekurser over et nivå.
+
+:::
+
+## 2b Gjennomgang
+
+
+```{.python code-line-numbers="|1-3|4-7|9|"}
+def bigger_or_not(b, n, k):
+    random_list = generate_random_list(n, k)   # Bruker funksjonen fra forrige oppgave til å generer en liste med tilfeldige tall.
+    new_list = []                              # Ny, tom liste.
+    for i in random_list:                      # for-løkk
+        if i >= b:                             # Sjekker om i er større eller lik b
+            new_list.append(i)
+    return new_list
+
+bigger_or_not(25, 15, 50) # Eksempel-test - sjekker om n = 15 tilfeldige verdier mellom 1 og k = 50, er større eller lik 25.
+```
+
+. . .
+
+```{python}
+def bigger_or_not(b, n, k):
+    random_list = generate_random_list(n, k)   # Bruker funksjonen fra forrige oppgave til å generer en liste med tilfeldige tall.
+    new_list = []                              # Ny, tom liste.
+    for i in random_list:                      # for-løkk
+        if i >= b:                             # Sjekker om i er større eller lik b
+            new_list.append(i)
+    return new_list
+
+bigger_or_not(25, 15, 50) # Eksempel-test - sjekker om n = 15 tilfeldige verdier mellom 1 og k = 50, er større eller lik 25.
+```
+
+
+::: notes
+Kaller `generate_random_list(n, k)` inne i vår nye funksjon. 
+
+Vi har altså lagd en algoritme. Steg for steg, generer data, så filtrer data, og returner den dataen. 
+
+Betinget logikk: `if i >= b:` er vårt første møte med betingelser. Vi sammenligner hver verdi `i` med terskelverdien `b`. Dette er som å si "hvis tallet oppfyller kravet vårt, ta det med".
+
+
+Iterering gjennom lister: `for i in random_list:` - Vi går gjennom hvert element i lista, ikke indeks-basert, men verdi-basert.
+
+
+:::
+
+
+
+
+
+
+## Oppgave 3a {.smaller}
+Du er samfunnsøkonom å undersøker hvor mange pasienter en fastlege kan ta i løpet av en dag.
+Lag en funksjon med fire argumenter ```consultation_schedule(number_of_patients, consultation_time, hours_per_day, days_per_week)```
+
+Funksjonen skal printe ut tekst og utregnete variabler som hvor mange pasienter legen kan ta per dag. Hvor mange arbeidsdager det tar å fullføre alle pasientene, og hvor mange pasienter legen kan ta i uka.
+
+* ```number_of_patients```: antall pasienter totalt (velg en eksempelverdi selv).
+* ```consultation_time```: hvor lang tid en konsultasjon tar (f.eks. 0.5 timer).
+* ```hours_per_day```: en variabel som er hvor mange arbeidstimer legen har per dag (som vanligvis er 7.5).
+* ```days_per_week```: en variabel som er antall arbeidsdager i uka (som er vanligvis 5).
+
+::: notes
+
+
+:::
+
+## 3a Gjennomgang
+
+```{.python code-line-numbers="|1-4|5-9|10-13|14-17|19-20|"}
+number_of_patients = 100  # Antall pasienter som skal behandles
+consultation_time = 0.5   # Konsultasjonstid per pasient i timer
+hours_per_day = 7.5       # Antall arbeidstimer per dag
+days_per_week = 5         # Antall arbeidsdager i uken
+
+def consultation_schedule(number_of_patients, consultation_time, hours_per_day, days_per_week):
+    # Beregn hvor mange pasienter legen kan se per dag
+    patients_per_day = int(hours_per_day / consultation_time)
+    print(f'Bruker vi {consultation_time} timer per konsultasjon - legen kan ta {patients_per_day} pasienter per dag. \n')
+
+    # Beregn hvor mange dager det tar å behandle alle pasientene
+    days_to_complete = float(round(number_of_patients / patients_per_day, 2))
+    print(f'Det tar {days_to_complete} dager å fullføre konsultasjon for {number_of_patients} pasienter.')
+
+    # Beregn hvor mange pasienter legen kan se på en uke
+    patients_per_week = patients_per_day * days_per_week
+    print(f'Legen kan se {patients_per_week} patienter på en uke med {days_per_week} arbeidsdager.')
+
+# Test funksjonen
+consultation_schedule(number_of_patients, consultation_time, hours_per_day, days_per_week)
+
+```
+
+. . .
+
+```{python}
+number_of_patients = 100  # Antall pasienter som skal behandles
+consultation_time = 0.5   # Konsultasjonstid per pasient i timer
+hours_per_day = 7.5       # Antall arbeidstimer per dag
+days_per_week = 5         # Antall arbeidsdager i uken
+
+def consultation_schedule(number_of_patients, consultation_time, hours_per_day, days_per_week):
+    # Beregn hvor mange pasienter legen kan se per dag
+    patients_per_day = int(hours_per_day / consultation_time)
+    print(f'Bruker vi {consultation_time} timer per konsultasjon - legen kan ta {patients_per_day} pasienter per dag. \n')
+
+    # Beregn hvor mange dager det tar å behandle alle pasientene
+    days_to_complete = float(round(number_of_patients / patients_per_day, 2))
+    print(f'Det tar {days_to_complete} dager å fullføre konsultasjon for {number_of_patients} pasienter.')
+
+    # Beregn hvor mange pasienter legen kan se på en uke
+    patients_per_week = patients_per_day * days_per_week
+    print(f'Legen kan se {patients_per_week} patienter på en uke med {days_per_week} arbeidsdager.')
+
+# Test funksjonen
+consultation_schedule(number_of_patients, consultation_time, hours_per_day, days_per_week)
+
+```
+
+::: notes
+
+Først definerer vi bare noen variabler. 
+
+
+Bruker `int()` fordi vi ikke kan ha "halve pasienter"
+
+
+Beregner hvor mange dager og runder av til 2 desimaler `float(round(..., 2))` 
+
+
+
+Antall pasienter per dager i uken for ukentlig kapasitet.
+
+
+
+
+Bruker vi 0.5 timer per konsultasjon - legen kan ta 15 pasienter per dag. 
+
+Det tar 6.67 dager å fullføre konsultasjon for 100 pasienter.
+
+Legen kan se 75 patienter på en uke med 5 arbeidsdager.
+
+
+:::
+
+
+
+## Oppgave 3b
+Lag en ny versjon av funksjonen over, som tar inn ett ekstra argument ```percent_sickleave```, som er hvor mange prosent sykemelding legen har. F.eks. 40% sykemelding, eller 60% - gjør slik at funksjonen tar hensyn til det. 
+
+
+## 3b Gjennomgang
+
+```{.python code-line-numbers="|1-5|7-13|15-21|23-24|"}
+number_of_patients = 100  # Antall pasienter som skal behandles
+consultation_time = 0.5  # Konsultasjonstid per pasient i timer
+hours_per_day = 7.5  # Antall arbeidstimer per dag
+days_per_week = 5  # Antall arbeidsdager i uken
+percent_sickleave = 40  # Sykemeldingsprosent (f.eks. 40%)
+
+def consultation_schedule(number_of_patients, consultation_time, hours_per_day, days_per_week, percent_sickleave):
+    # Juster arbeidstiden basert på sykemeldingsprosent
+    effective_hours_per_day = hours_per_day * (1 - percent_sickleave / 100)
+    
+    # Beregn hvor mange pasienter legen kan se per dag
+    patients_per_day = int(effective_hours_per_day / consultation_time)
+    print(f'Med {percent_sickleave}% sykemelding, kan legen se {patients_per_day} pasienter per dag. \n')
+
+    # Beregn hvor mange dager det tar å behandle alle pasientene
+    days_to_complete = int(number_of_patients / patients_per_day)
+    print(f'Det vil ta {days_to_complete} dager å fullføre konsultasjon for {number_of_patients} pasienter.')
+
+    # Beregn hvor mange pasienter legen kan se på en uke
+    patients_per_week = patients_per_day * days_per_week
+    print(f'Legen kan se {patients_per_week} pasienter i løpet av en uke med {days_per_week} arbeidsdager.')
+
+# Test funksjonen med sykefravær
+consultation_schedule(number_of_patients, consultation_time, hours_per_day, days_per_week, percent_sickleave)
+
+
+```
+
+. . .
+
+```{python}
+number_of_patients = 100  # Antall pasienter som skal behandles
+consultation_time = 0.5  # Konsultasjonstid per pasient i timer
+hours_per_day = 7.5  # Antall arbeidstimer per dag
+days_per_week = 5  # Antall arbeidsdager i uken
+percent_sickleave = 40  # Sykemeldingsprosent (f.eks. 40%)
+
+def consultation_schedule(number_of_patients, consultation_time, hours_per_day, days_per_week, percent_sickleave):
+    # Juster arbeidstiden basert på sykemeldingsprosent
+    effective_hours_per_day = hours_per_day * (1 - percent_sickleave / 100)
+    
+    # Beregn hvor mange pasienter legen kan se per dag
+    patients_per_day = int(effective_hours_per_day / consultation_time)
+    print(f'Med {percent_sickleave}% sykemelding, kan legen se {patients_per_day} pasienter per dag. \n')
+
+    # Beregn hvor mange dager det tar å behandle alle pasientene
+    days_to_complete = int(number_of_patients / patients_per_day)
+    print(f'Det vil ta {days_to_complete} dager å fullføre konsultasjon for {number_of_patients} pasienter.')
+
+    # Beregn hvor mange pasienter legen kan se på en uke
+    patients_per_week = patients_per_day * days_per_week
+    print(f'Legen kan se {patients_per_week} pasienter i løpet av en uke med {days_per_week} arbeidsdager.')
+
+# Test funksjonen med sykefravær
+consultation_schedule(number_of_patients, consultation_time, hours_per_day, days_per_week, percent_sickleave)
+
+
+```
+
+
+::: notes
+
+Effective hours er mer eller mindre eneste endring. percent sickleave må bare settes inn.
+:::
+

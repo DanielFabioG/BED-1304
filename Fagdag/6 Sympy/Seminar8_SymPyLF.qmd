@@ -1,0 +1,247 @@
+---
+title: "Seminar 8 -  \U0001F4D0 \U0001F9EE **SymPy** \U0001F4CF \U0001F522"
+jupyter: python3
+---
+
+
+## Introduksjon  
+Til nå har vi jobbet med fundamentale prinsipper i Python, inkludert:  
+- **Variabler og funksjoner**  
+- **Lister og datastrukturer**  
+- **NumPy** (numeriske beregninger)  
+- **Pandas** (databehandling)  
+- **Matplotlib & Seaborn** (visualisering)  
+
+Visualisering er viktig for egen forståelse og for å kunne kommunisere funn til andre. Som samfunnsøkonomer og økonomer jobber vi ofte i tverrfaglige team hvor matematiske funksjoner spiller en sentral rolle. Derfor må vi kunne forenkle uttrykk, derivere funksjoner for å finne optimum, og trekke innsikt fra matematiske modeller. Derfor kan ofte SymPy være en god pakke å bruke sammen med visualiseringer fra SeaBorn eller Matplotlib.
+
+## Hvorfor *SymPy*?  
+[*SymPy*](https://www.sympy.org/en/index.html) er et kraftig Python-bibliotek for symbolsk matematikk. Det gjør det mulig å:  
+- Forenkle matematiske uttrykk  
+- Utføre derivasjon og integrasjon  
+- Løse ligninger  
+- Og mye, mye mer
+
+Å ha kjennskap til *SymPy* kan være svært nyttig for økonomer som arbeider med modellering og analyse.  
+
+## Seminaroppgaver  
+Disse oppgavene er laget for å gi deg trening i å jobbe med funksjoner og trekke innsikt av disse, ved hjelp av verktøy som SymPy. **Dette er ikke arbeidskrav**, men en svært god forberedelse til eksamen.  
+
+Bruk **Google, forelesningsnotater og pseudokode** aktivt for å løse oppgavene.  
+
+🚀 *Lykke til!*
+
+
+# ✏️ Oppgave 1 - Tilbud og etterspørsel
+La oss se på et marked der etterspørselen ($D$) og tilbudet ($S$) for et produkt er gitt ved følgende funksjoner:
+
+* **Etterspørsel:** $D(p) = 100 - 2p$
+* **Tilbud:** $S(p) = 3p - 20$
+
+Der $p$ er prisen på produktet i kroner, og $D(p)$ og $S(p)$ representerer henholdsvis mengden som etterspørres og tilbys ved prisen $p$.
+
+**Finn likeveksprisen $p$, der tilbudet er lik etterspørselen**
+
+```{python}
+# Vi skal finne der D(p) = S(p).
+# Altså 100 - 2p = 3p - 20
+
+### Løsningsforslag ###
+
+import sympy as sp
+
+# Definerer variabelen vår p (pris)
+p = sp.symbols('p')
+
+# Definerer etterspørsel- og tilbudsfunksjonene
+D = 100 - 2*p
+S = 3*p - 20
+
+# Løser ligningen D(p) = S(p)
+likevekt = sp.solve(D - S, p)
+
+# Svaret
+print(f'Det er likevekt når prisen {p} er lik {likevekt[0]}!')
+```
+
+# ✏️ Oppgave 2 - Visualisering av likevekt
+I oppgave 1 fant du likevektsprisen $p$ der tilbud og etterspørselen er like. Nå skal du lage en graf som viser:
+
+1. Tilbudskurven $S(p)$
+2. Etterspørselskurven $D(p)$
+3. Likevektsprisen $p$, og hva den korresponderende mengden som etterspørres/tilbys ved prisen $p$.
+
+**Hint:** Her kan du få bruk for både NumPy og Matplotlib.
+
+```{python}
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Definer funksjonene for etterspørsel og tilbud
+def D(p):
+    return 100 - 2*p
+
+def S(p):
+    return 3*p - 20
+
+# Lage et utvalg av priser fra 0 til 50
+p_values = np.linspace(0, 50, 500)
+
+# Beregn etterspørsel og tilbud
+D_values = D(p_values)
+S_values = S(p_values)
+
+# Finn likevektspunktet (fra oppgave 1, der D = S)
+# Vi finner at likevekt er p = 24
+p_eq = 24
+q_eq = D(p_eq)  # eller S(p_eq) - begge gir samme resultat
+
+# Plotte kurvene
+plt.plot(p_values, D_values, label="Etterspørsel D(p) = 100 - 2p", color="blue")
+plt.plot(p_values, S_values, label="Tilbud S(p) = 3p - 20", color="red")
+
+# Markere likevektspunktet på plottet
+plt.scatter(p_eq, q_eq, color="green", zorder=5)
+plt.text(p_eq + 1, q_eq + 2, f'Likevekt: p={p_eq}, q={q_eq}', color="green")
+
+# Akser og titler
+plt.xlabel('Pris (p)')
+plt.ylabel('Mengde (q)')
+plt.title('Marked: Etterspørsel og Tilbud')
+plt.axhline(0, color='black',linewidth=0.5)
+plt.axvline(0, color='black',linewidth=0.5)
+plt.grid(True)
+plt.legend()
+
+# Vise grafen
+plt.show()
+```
+
+# ✏️ Oppgave 3 - Jobbe med matematiske uttrykk.
+I SymPy må vi initialisere symboler, det gjør vi f.eks. slik
+```python
+x, y, z = symbols('x y z')
+```
+
+## Oppgave 3a - ekspandere uttrykk.
+SymPy har en funksjon som kalles `expand(ditt_uttrykk)`. Bruk denne til å utvide uttrykket $(x+y)^2$ til $x^2 + 2xy + y^2$ (første kvadratsetning).
+
+Kjør dette først:
+```python
+from sympy import symbols, expand, factor
+```
+
+```{python}
+import sympy as sp
+from sympy import symbols, expand, factor
+
+x, y, z = sp.symbols('x y z')
+
+# Skriver uttrykket vårt
+expr = (x+y)**2
+
+new_expr = expand(expr)
+new_expr
+```
+
+Vips - da var det gjort!
+
+## Oppgave 3b - faktorisere uttrykk
+Nå har du akkurat lagd et uttrykk, som er det utvidede *versjonen* av $(x+y)^2$. Faktoriser dette, og se at du får det du begynte med.
+
+```{python}
+factor(new_expr)
+```
+
+Vips - tilbake til start!
+
+# ✏️ Oppgave 4
+I denne oppgaven skal vi se på Cobb-Douglas funksjonen, den ser slik ut
+$$f(K, L) = A \cdot K^{\alpha} \cdot L^{\beta}$$
+hvor,
+- $f$ er total produksjon
+- $K$ er mengden kapital (for eksempel maskiner, utstyr, bygninger)
+- $L$ er mengden arbeidskraft (antall arbeidere eller arbeidstimer)
+- $A$ er et mål på produktivitet
+- $\alpha$ og $\beta$ er eksponenter som viser elastisiteten til henholdsvis kapital og arbeidskraft. De representerer hvor stor andel av produksjonen som kommer fra kapital og arbeidskraft.
+
+Typisk er at $\alpha + \beta = 1$, som som indikerer konstante skalautbytter. Dette betyr at hvis du fordobler både kapital og arbeidskraft, vil produksjonen også fordobles.
+
+## Oppgave 4.1
+I økonomi og økonometri er **Cobb-Douglas** sin produksjonsfunksjon ofte brukt, og i denne deloppgaven skal du lage en funksjon som definerer Cobb-Douglas funksjonen, hvor vi setter $A=1$, $\alpha = 0.5$ og $\beta = 0.5$.
+
+## Oppgave 4.2
+Bruk SymPy til å finne den partiell deriverte av Cobb-Douglas funksjonen (med hensyn på $K$), dette kaller vi gjerne *marginale produkt av kapital (MPK)*. 
+
+Kommenter hva resultatet er. Ser vi noe spesielt med MPK i forhold til Cobb-Douglas funksjonen?
+
+Bruk funksjonen du definerte i oppgave 3.1.
+
+## Oppgave 4.3
+Hvis vi holder $L$, $A$, $\alpha$ og $\beta$ konstant. Hvordan utvikler MPK seg, hvis $K$ øker? 
+
+Velg selv en passende måte å presentere dette på. Beskriv hva dette betyr for den totale produksjonen til Cobb-Douglas funksjonen, $f(K, L)$.
+
+Du bestemmer selv verdiene på $L$, $A$, $\alpha$ og $\beta$ (men sørg for $0 < \alpha < 1$, $0 < \beta < 1$ og $\alpha + \beta =1$).
+
+```{python}
+# Oppgave 4.1 
+
+# Definerer Cobb-Douglas-produksjonsfunksjonen, etter oppgavetekstens beskrivelse
+def cobb_douglas(K, L, A=1, alpha=0.5, beta=0.5):
+    return A * (K ** alpha) * (L ** beta)
+```
+
+```{python}
+# Oppgave 4.2 
+import sympy as sp
+
+# Definer symboler for kapital (K), arbeidskraft (L), og konstanter A, alpha, beta
+K, L = sp.symbols('K L')
+A, alpha, beta = sp.symbols('A alpha beta')
+
+# Finn partielle deriverte med hensyn til kapital (K)
+dY_dK = sp.diff(cobb_douglas(K, L, A, alpha, beta), K)
+
+print("Den partielle deriverte med hensyn på K er:")
+display(dY_dK)
+```
+
+Hvis vi kalles Cobb-Douglas funksjonen for $f(K, L)$, og så ser vi på den partiell-deriverte av Cobb-Douglas funksjonen, også kalt MLP, som vi fant over ser vi at:
+
+$$MPK = \frac{AK^{\alpha}L^{\beta}\alpha}{K}$$
+
+kan skrives som
+
+$$MPK = \alpha \cdot \frac{f(K, L)}{K}$$
+
+```{python}
+# Oppgave 4.3 
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Definerer en funksjon for MPK basert på derivert av Cobb-Douglas
+def MPK(K, L=10, A=1, alpha=0.5, beta=0.5):
+    return (A * alpha * K**(alpha) * L**beta)/K
+
+# Verdier for K
+K_values = np.linspace(1, 200, 100)
+
+# Beregn MPK for hver verdi av K
+MPK_values = MPK(K_values)
+
+# Plotter MPK som funksjon av K
+plt.plot(K_values, MPK_values, label='MPK (marginalprodukt av kapital)')
+plt.title('Utviklingen av MPK når K øker')
+plt.xlabel('Kapital (K)')
+plt.ylabel('MPK')
+plt.grid(True)
+plt.legend()
+plt.show()
+```
+
+### **Kommentarer til Oppgave 4.3**
+Her har vi plottet $MPK$, som en funksjon av kapital $K$. At MPK, den partiell-deriverte av $f(K, L)$ (med hensyn på $K$), alltid er positiv betyr at produksjonen $f$ alltid vil øke når kapitalmengden $K$ øker. Gitt at vi holder alle andre variabler konstante, altså $L$, $A$, $\alpha$ og $\beta$. 
+
+Selv om marginalproduktet av kapital avtar når $K$ øker (som plottet over viser), vil det aldri bli negativt. Skal vi tolke dette i en mer økonomisk forståelse av produksjon, kan man si at i en typisk produksjonsprosess vil mer kapital (som f.eks. maskiner, teknologi osv.) bidra til økt produksjon, men etter hvert vil denne økningen ha mindre og mindre effekt.
+

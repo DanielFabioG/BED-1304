@@ -1,0 +1,349 @@
+---
+title: "Bed-1304 Python lab"
+subtitle: "Seminar 7 - Matplotlib og visualisering"
+date: last-modified
+date-format: "DD-MM-YYYY"
+echo: false
+warning: false
+format:
+  revealjs:
+    theme: dark
+    title-slide: false
+    slide-level: 2
+    width: 1280
+    height: 720
+    margin: 0.07
+    center: false
+    auto-stretch: false
+    slide-number: c/t
+    transition: fade
+    navigation-mode: linear
+    controls: true
+    progress: true
+    history: true
+    hash: true
+    embed-resources: true
+    preview-links: false
+    include-in-header:
+      text: |
+        <style>
+        .reveal { font-family: Arial, Helvetica, sans-serif; font-size: 30px; color: #f2f4f7; }
+        .reveal h1, .reveal h2, .reveal h3 { font-family: Arial, Helvetica, sans-serif; text-transform: none; font-weight: 600; color: #f2f4f7; }
+        .reveal h2 { font-size: 1.55em; margin-bottom: 0.65em; }
+        .reveal h3 { font-size: 1.05em; color: #8ad6d0; margin-bottom: 0.4em; }
+        .reveal p, .reveal li { line-height: 1.35; }
+        .reveal li { margin-bottom: 0.5em; }
+        .reveal strong { color: #8ad6d0; }
+        .reveal .columns { display: flex; gap: 2em; }
+        .reveal .column { min-width: 0; }
+        .reveal table { font-size: 0.8em; width: 100%; margin: 0.65em 0; }
+        .reveal table th { color: #8ad6d0; border-bottom: 2px solid #8ad6d0; }
+        .reveal table td, .reveal table th { padding: 0.55em 0.5em; vertical-align: top; }
+        .reveal .source { font-size: 0.52em; color: #bbc4d0; margin-top: 1.1em; }
+        .reveal .lead { font-size: 1.32em; line-height: 1.35; margin: 1em 0; }
+        .reveal .equation { font-family: Georgia, serif; font-size: 1.11em; padding: 0.55em 0; }
+        .reveal .small { font-size: 0.67em; }
+        .reveal a { color: #8ad6d0; }
+        .reveal .evidence { width: 100%; background: white; margin: 0; }
+        </style>
+---
+
+
+## Last ned seminaroppgavene
+
+Gå inn på canvas eller [uit-bed-1304-h25.github.io](https://uit-bed-1304-h25.github.io) og finn "Oppgaver"
+
+Last ned "Seminar7.1_Matplotlib.ipynb"
+
+
+Vi starter med datainnlasting og installasjon av matplotlib
+
+### Installere matplotlib
+Om du ikke har matplotlib installert:
+```{.python}
+# %pip install matplotlib 
+```
+
+
+
+## Laste inn datasett
+
+Først må vi laste inn pandas for å kunne laste inn datasettet vi skal bruke
+
+Datasettet ligger på canvas under "Ressurser" -> "Data til forelesningsnotater"
+
+Klikk på StudentPerformanceFactors.csv, så last ned og legg filen i samme mappe som Seminar7.1_Matplotlib.ipynb
+
+```{.python}
+import pandas as pd
+df = pd.read_csv("StudentPerformanceFactors.csv") # Last inn datasettet
+```
+
+Evt kan du trykke på "Raw" og kopiere linken til filen direkte fra github.
+```{.python}
+df = pd.read_csv("https://raw.githubusercontent.com/uit-bed-1304-h25/uit-bed-1304-h25.github.io/refs/heads/main/data/StudentPerformanceFactors.csv")
+```
+
+
+## Oppgave 1a
+Lag et scatter-plot som viser forholdet mellom antall timer brukt på å studere (```Hours_Studied```) og eksamensresultatet (```Exam_Score```). Bruk en farge for å indikere kjønn (```Gender```) i plottet, hvor for eksempel blå representerer "Male" og rød representerer "Female".
+
+Hva kan vi si om sammenhengen mellom antall timer studert og eksamensresultater? Ser det ut til å være en forskjell mellom kjønnene?
+
+
+## Eksempel på plotting med matplotlib
+
+```{.python}
+# Importer matplotlib først
+import matplotlib.pyplot as plt
+df = pd.read_csv("StudentPerformanceFactors.csv")
+
+fargevariabel = df['Gender'].map({'Male': 'blue', 'Female': 'red'})
+# Eksempel på enkel plotting
+plt.figure(figsize=(10, 6))
+plt.scatter(df['variabel x'], df['variabel y'], color=fargevariabel, alpha=0.7)
+
+# Tittel og akse-navn
+plt.title('Studietimer vs Eksamensresultater etter kjønn')
+plt.xlabel('Antall timer studert per uke')
+plt.ylabel('Eksamensresultat')
+
+# Legg til en legende og vis plottet
+plt.legend()
+plt.show()
+```
+
+
+
+
+## Oppave 1a figur
+
+```{python}
+#| echo: false   # Skjul kode i denne blokken (overstyrer også globalt om endret senere)
+import pandas as pd
+import matplotlib.pyplot as plt
+df = pd.read_csv("https://raw.githubusercontent.com/uit-bed-1304-h25/uit-bed-1304-h25.github.io/refs/heads/main/data/StudentPerformanceFactors.csv")
+
+# Lag farger basert på kjønn
+colors = df['Gender'].map({'Male': 'blue', 'Female': 'red'})
+
+# Scatter-plot av antall timer studert vs. eksamensresultat
+plt.figure(figsize=(10, 6))
+plt.scatter(df['Hours_Studied'], df['Exam_Score'], c=colors, alpha=0.7)
+
+# Tittel og akse-navn
+plt.title('Studietimer vs Eksamensresultater etter kjønn')
+plt.xlabel('Antall timer studert per uke')
+plt.ylabel('Eksamensresultat')
+
+# Legg til en legend
+plt.legend(handles=[plt.Line2D([0], [0], marker='o', color='w', markerfacecolor='blue', markersize=10, label='Male'),
+                    plt.Line2D([0], [0], marker='o', color='w', markerfacecolor='red', markersize=10, label='Female')])
+
+# Vise plottet
+plt.grid(True)
+plt.show()
+```
+
+## Oppgave 1a Fra løsningsforslag
+
+```{.python}
+import pandas as pd
+import matplotlib.pyplot as plt
+df = pd.read_csv("https://raw.githubusercontent.com/uit-bed-1304-h25/uit-bed-1304-h25.github.io/refs/heads/main/data/StudentPerformanceFactors.csv")
+
+
+colors = df['Gender'].map({'Male': 'blue', 'Female': 'red'}) # Lag farger basert på kjønn
+plt.figure(figsize=(10, 6)) # Scatter-plot av antall timer studert vs. eksamensresultat
+plt.scatter(df['Hours_Studied'], df['Exam_Score'], c=colors, alpha=0.7)
+ # Tittel og akse-navn
+plt.title('Studietimer vs Eksamensresultater etter kjønn')
+plt.xlabel('Antall timer studert per uke')
+plt.ylabel('Eksamensresultat')
+
+# Legg til en legend
+plt.legend(handles=[plt.Line2D([0], [0], marker='o', color='w', markerfacecolor='blue', markersize=10, label='Male'),
+                    plt.Line2D([0], [0], marker='o', color='w', markerfacecolor='red', markersize=10, label='Female')])
+# Vise plottet
+plt.grid(True)
+plt.show()
+```
+
+## LF kode som jeg ville gjort det
+
+```{.python}
+import matplotlib.pyplot as plt
+import pandas as pd
+df = pd.read_csv("https://raw.githubusercontent.com/uit-bed-1304-h25/uit-bed-1304-h25.github.io/refs/heads/main/data/StudentPerformanceFactors.csv")
+
+plt.figure(figsize=(10,6))
+plt.scatter(df[df['Gender']=='Male']['Hours_Studied'], df[df['Gender']=='Male']['Exam_Score'], color='blue', alpha=0.7, label='Male')
+plt.scatter(df[df['Gender']=='Female']['Hours_Studied'], df[df['Gender']=='Female']['Exam_Score'], color='red', alpha=0.7, label='Female')
+plt.xlabel('Hours Studied')
+plt.ylabel('Exam Score')
+plt.legend()
+plt.show()
+```
+
+
+
+
+
+## Oppgave 1b
+Lag et histogram som viser fordelingen av antall timer søvn per natt (```Sleep_Hours```). Del dataene inn i intervaller på én time.
+
+Hva er gjennomsnittlig antall timer med søvn per natt blant studentene? Virker det som om søvnmengden har en innvirkning på eksamensresultatene?
+
+
+
+## Oppgave 1b LF
+
+
+```{python}
+# Histogram av antall timer søvn
+plt.figure(figsize=(10, 6))
+plt.hist(df['Sleep_Hours'], bins=range(4, 12), color='purple', edgecolor='black', alpha=0.7)
+
+# Tittel og akse-navn
+plt.title('Fordeling av antall timer søvn')
+plt.xlabel('Antall timer søvn per natt')
+plt.ylabel('Antall studenter')
+
+plt.grid(True)
+plt.show()
+```
+
+
+## Oppgave 1b Kode
+```{.python}
+# Histogram av antall timer søvn
+plt.figure(figsize=(10, 6))
+plt.hist(df['Sleep_Hours'], bins=range(4, 12), color='purple', edgecolor='black', alpha=0.7)
+
+# Tittel og akse-navn
+plt.title('Fordeling av antall timer søvn')
+plt.xlabel('Antall timer søvn per natt')
+plt.ylabel('Antall studenter')
+
+plt.grid(True)
+plt.show()
+```
+
+
+
+
+
+## Oppgave 1c:
+
+```{python}
+#| echo: false  
+# Sortere data etter fraværsprosent
+df_sorted = df.sort_values('Attendance')
+
+# Linjediagram
+plt.figure(figsize=(10, 6))
+plt.plot(df_sorted['Attendance'], df_sorted['Exam_Score'], color='green', marker='o')
+
+# Tittel og akse-navn
+plt.title('Fraværsprosent vs Eksamensresultater')
+plt.xlabel('Fraværsprosent')
+plt.ylabel('Eksamensresultat')
+
+plt.grid(True)
+plt.show()
+```
+
+
+## Oppgave 1c kode
+```{.python}
+# Sortere data etter fraværsprosent
+df_sorted = df.sort_values('Attendance')
+
+# Linjediagram
+plt.figure(figsize=(10, 6))
+plt.plot(df_sorted['Attendance'], df_sorted['Exam_Score'], color='green', marker='o')
+
+# Tittel og akse-navn
+plt.title('Fraværsprosent vs Eksamensresultater')
+plt.xlabel('Fraværsprosent')
+plt.ylabel('Eksamensresultat')
+
+plt.grid(True)
+plt.show()
+```
+
+
+
+## Oppgave 1d:
+
+```{python}
+#| echo: false 
+# Beregn gjennomsnittlig eksamensresultat for hver kategori av foreldreinvolvering
+avg_scores_by_involvement = df.groupby('Parental_Involvement')['Exam_Score'].mean()
+
+# Bar-plot av gjennomsnittlige eksamensresultater for hver kategori
+plt.figure(figsize=(10, 6))
+avg_scores_by_involvement.plot(kind='bar', color=['skyblue', 'orange', 'green'], edgecolor='black')
+
+# Tittel og akse-navn
+plt.title('Gjennomsnittlig eksamensresultat vs Foreldreinvolvering')
+plt.xlabel('Foreldreinvolvering')
+plt.ylabel('Gjennomsnittlig eksamensresultat')
+
+plt.grid(True)
+plt.show()
+```
+
+## Oppgave 1d kode 
+
+```{.python}
+# Beregn gjennomsnittlig eksamensresultat for hver kategori av foreldreinvolvering
+avg_scores_by_involvement = df.groupby('Parental_Involvement')['Exam_Score'].mean()
+
+# Bar-plot av gjennomsnittlige eksamensresultater for hver kategori
+plt.figure(figsize=(10, 6))
+avg_scores_by_involvement.plot(kind='bar', color=['skyblue', 'orange', 'green'], edgecolor='black')
+
+# Tittel og akse-navn
+plt.title('Gjennomsnittlig eksamensresultat vs Foreldreinvolvering')
+plt.xlabel('Foreldreinvolvering')
+plt.ylabel('Gjennomsnittlig eksamensresultat')
+
+plt.grid(True)
+plt.show()
+```
+
+
+## Oppgave 1e:
+
+```{python}
+#| echo: false
+
+# Scatter-plot av fysisk aktivitet vs eksamensresultater
+plt.figure(figsize=(10, 6))
+plt.scatter(df['Physical_Activity'], df['Exam_Score'], color='orange', alpha=0.7)
+
+# Tittel og akse-navn
+plt.title('Fysisk aktivitet vs Eksamensresultater')
+plt.xlabel('Timer med fysisk aktivitet per uke')
+plt.ylabel('Eksamensresultat')
+
+plt.grid(True)
+plt.show()
+```
+
+## Oppgave 1e kode 
+
+```{.python}
+# Scatter-plot av fysisk aktivitet vs eksamensresultater
+plt.figure(figsize=(10, 6))
+plt.scatter(df['Physical_Activity'], df['Exam_Score'], color='orange', alpha=0.7)
+
+# Tittel og akse-navn
+plt.title('Fysisk aktivitet vs Eksamensresultater')
+plt.xlabel('Timer med fysisk aktivitet per uke')
+plt.ylabel('Eksamensresultat')
+
+plt.grid(True)
+plt.show()
+```

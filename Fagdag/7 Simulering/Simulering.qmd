@@ -1,0 +1,358 @@
+---
+title: "Bed-1304 Python lab"
+subtitle: "Seminar 9 - Simulering"
+date: last-modified
+date-format: "DD-MM-YYYY"
+echo: false
+warning: false
+format:
+  revealjs:
+    theme: dark
+    title-slide: false
+    slide-level: 2
+    width: 1280
+    height: 720
+    margin: 0.07
+    center: false
+    auto-stretch: false
+    slide-number: c/t
+    transition: fade
+    navigation-mode: linear
+    controls: true
+    progress: true
+    history: true
+    hash: true
+    embed-resources: true
+    preview-links: false
+    include-in-header:
+      text: |
+        <style>
+        .reveal { font-family: Arial, Helvetica, sans-serif; font-size: 30px; color: #f2f4f7; }
+        .reveal h1, .reveal h2, .reveal h3 { font-family: Arial, Helvetica, sans-serif; text-transform: none; font-weight: 600; color: #f2f4f7; }
+        .reveal h2 { font-size: 1.55em; margin-bottom: 0.65em; }
+        .reveal h3 { font-size: 1.05em; color: #8ad6d0; margin-bottom: 0.4em; }
+        .reveal p, .reveal li { line-height: 1.35; }
+        .reveal li { margin-bottom: 0.5em; }
+        .reveal strong { color: #8ad6d0; }
+        .reveal .columns { display: flex; gap: 2em; }
+        .reveal .column { min-width: 0; }
+        .reveal table { font-size: 0.8em; width: 100%; margin: 0.65em 0; }
+        .reveal table th { color: #8ad6d0; border-bottom: 2px solid #8ad6d0; }
+        .reveal table td, .reveal table th { padding: 0.55em 0.5em; vertical-align: top; }
+        .reveal .source { font-size: 0.52em; color: #bbc4d0; margin-top: 1.1em; }
+        .reveal .lead { font-size: 1.32em; line-height: 1.35; margin: 1em 0; }
+        .reveal .equation { font-family: Georgia, serif; font-size: 1.11em; padding: 0.55em 0; }
+        .reveal .small { font-size: 0.67em; }
+        .reveal a { color: #8ad6d0; }
+        .reveal .evidence { width: 100%; background: white; margin: 0; }
+        </style>
+---
+
+
+## Vi bruker forelesingsnotatene til seminaret
+
+Gå inn på canvas eller [uit-bed-1304-h25.github.io](https://uit-bed-1304-h25.github.io) og finn "notebooks"
+
+Dere bør vel ha den fra før men om ikke, så last ned "9 - simulering.ipynb"
+
+
+
+## Oppgave 1 - Simulering av aksjekurs 
+
+En aksjekurs beveger seg tilfeldig over tid. Vi antar at aksjen starter på **100 kroner** og endrer seg tilfeldig for hver tidsperiode.  
+
+- **Lag en simulering av aksjekursen over 100 dager**  
+- Hver dag endrer aksjekursen seg med en tilfeldig verdi mellom -3% og +3%  
+- Plott kursutviklingen  
+
+*Tips: Bruk en for-løkke og lagre verdiene i en liste!* 
+
+Bruk denne: `np.random.uniform(-0.03, 0.03)` 
+
+Den gir tilfeldig tall mellom $-0.03$ og $0.03$.
+
+
+## Eksempelkode til oppgave 1
+
+```{.python}
+import numpy as np
+import matplotlib.pyplot as plt
+
+days = 50 # Parametere
+price = 50
+prices = [price]
+x,y = -0.1, 0.1
+
+for whatever in range(days): # Simulerer aksjekursen over tid
+    endring = np.random.uniform(x, y)  # Tilfeldig endring mellom x og y
+    price = price * (1 + endring)
+    prices.append(price) # Legger til hva som skal være her
+    
+# Plotter aksjekursen
+days_liste = list(range(days + 1))  # +1  for å få med den siste
+plt.plot(days_liste, prices)
+plt.title("Simulert aksjekurs")
+plt.xlabel("Dager")
+plt.ylabel("Kurs (kr)")
+plt.show()
+```
+
+
+
+::: notes
+for dog in range. altså den her for i in range betyr at for hver iterasjon i range (her range(days) som er 100) så gjør du det som er innrykket under. Altså for hver dag så gjør du det som er innrykket under.
+
+om det står dog, katt, i kke noe å si. Det er bare en variabel som tar verdien av hver iterasjon. Den kan hete hva som helst 
+::: 
+
+
+
+## Oppgave 1 LF
+
+
+```{.python}
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Parametere
+days = 100
+price = 100
+prices = [price]
+
+# Simulerer aksjekursen over tid
+for dog in range(days):
+    price *= 1 + np.random.uniform(-0.03, 0.03)  # Tilfeldig endring mellom -3% og +3%
+    prices.append(price)
+
+# Plotter aksjekursen
+plt.plot(prices)
+plt.title("Simulert aksjekurs")
+plt.xlabel("Dager")
+plt.ylabel("Kurs (kr)")
+plt.show()
+```
+
+::: notes
+for dog in range. altså den her for i in range betyr at for hver iterasjon i range (her range(days) som er 100) så gjør du det som er innrykket under. Altså for hver dag så gjør du det som er innrykket under.
+
+om det står dog, katt, i kke noe å si. Det er bare en variabel som tar verdien av hver iterasjon. Den kan hete hva som helst 
+::: 
+
+
+
+
+## Oppgave 2 - Simulering av bedriftens overskudd 
+
+En bedrift selger **Q** produkter til pris **p**, og produksjonskostnaden per enhet er **C**.  
+Overskuddet beregnes som:  
+
+$\text{Overskudd} = Q \cdot p - Q \cdot C$
+
+**Lag en simulering der**:  
+- **Q** varierer mellom 900 og 1100  
+- **p** varierer mellom 90 og 110  
+- **C** varierer mellom 50 og 70  
+
+* Kjør simuleringen **1000 ganger**  
+* Plott histogram av overskuddet  
+
+
+## Oppgave 2 LF
+
+```{.python}
+# Simulering av bedriftens overskudd
+num_simulations = 1000
+profits = []
+
+for _ in range(num_simulations):
+    Q = np.random.randint(900, 1100)  # Antall solgte enheter
+    p = np.random.uniform(90, 110)  # Pris per enhet
+    C = np.random.uniform(50, 70)  # Kostnad per enhet
+    
+    profit = Q * p - Q * C  # Overskuddsformel
+    profits.append(profit)
+
+# Plotter histogram
+plt.hist(profits, bins=50)
+plt.title("Fordeling av bedriftens overskudd")
+plt.xlabel("Overskudd (kr)")
+plt.ylabel("Antall simuleringer")
+plt.show()
+```
+
+
+
+
+
+
+## Oppgave 3 - Simulering av lånekostnader  
+
+Du tar opp et boliglån på **2 000 000 kr**. Renten er i utgangspunktet **3%**, men den varierer tilfeldig mellom **2% og 5%** hvert år.  
+
+- **Simuler utviklingen i lånekostnader over 30 år**  
+- Beregn den totale rentekostnaden etter 30 år  
+- Kjør simuleringen **500 ganger**, og plott fordelingen av totale rentekostnader
+
+
+## Oppgave 3 LF
+
+```{.python}
+# Funksjon for å simulere renteutvikling
+def simulate_loan(years=30, principal=2_000_000, base_rate=0.03, min_rate=0.02, max_rate=0.05):
+    total_interest = 0
+    for _ in range(years):
+        rate = np.random.uniform(min_rate, max_rate)
+        interest = principal * rate
+        total_interest += interest
+    return total_interest
+
+# Kjører simuleringen 500 ganger
+loan_costs = [simulate_loan() for _ in range(500)]
+
+# Plotter histogram over totale rentekostnader
+plt.hist(loan_costs, bins=50)
+plt.title("Fordeling av totale rentekostnader over 30 år")
+plt.xlabel("Totale renter (kr)")
+plt.ylabel("Antall simuleringer")
+plt.show()
+```
+
+
+
+
+## Oppgave 4 - Simulering av lagerstyring og etterspørsel  
+
+Et selskap håndterer en vare med en ukentlig etterspørsel som varierer mellom **80 og 120 enheter**.  
+De bestiller varer hver uke basert på en prognose, men **det er alltid en usikkerhet på ±10% i etterspørselen**.  
+
+- **Simuler lagerbeholdning over 52 uker**  
+- Start med et lager på **500 enheter**  
+- Hvis lageret går under **100 enheter**, bestilles **200 nye enheter**  
+- Plott utviklingen i lagerbeholdning over tid
+
+
+## Oppgave 4 LF
+
+```{.python}
+# Lagerstyring simulering
+weeks = 52
+stock = 500
+stock_levels = [stock]
+
+for _ in range(weeks):
+    demand = np.random.randint(80, 120)  # Ukentlig etterspørsel
+    demand += demand * np.random.uniform(-0.1, 0.1)  # Usikkerhet på ±10%
+    
+    stock -= demand  # Trekk fra etterspørsel
+    
+    if stock < 100:  # Hvis lageret blir for lavt, bestill mer
+        stock += 200
+    
+    stock_levels.append(stock)
+
+# Plot lagerbeholdning over tid
+plt.plot(stock_levels, marker='o')
+plt.title("Lagerbeholdning over 52 uker")
+plt.xlabel("Uker")
+plt.ylabel("Antall enheter på lager")
+plt.show()
+```
+
+
+
+
+
+
+## Oppgave 5 - Simuleringer
+
+Bruk simulering, til å finne ut sannsynligheten for at du triller to treninger med sum $\textbf{over eller lik}$ $9$. 
+- Visualiser utfallene ved bruk av et histogram.
+- Antall simuleringer skal dere velge selv, men kommenter hvorfor dere velger som dere gjør.
+- Under er et lite kodehint for hva dere kan ta i bruk.
+```{.python}
+        # Mulige bibliotek for oppgaven.
+        import numpy as np
+        import matplotlib.pyplot as plt
+        import random
+
+        # Du kan få bruk for funksjonen (hvor argumentene må spesifiseres i henhold til oppgaven). Hvor low = inkludert, high = ekskludert.
+        np.random.randint(low, high=None, size=None, dtype=int)
+```
+
+
+
+
+## Oppgave 5.1 LF
+
+```{python}
+# Oppgave 5.1
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Antall simuleringer
+sims = 1000000
+
+# Simulere kast med to terninger
+terning1 = np.random.randint(1, 6+1, sims)
+terning2 = np.random.randint(1, 6+1, sims)
+
+# Beregn summen av de to terningene for hver simulering
+sum_terninger = terning1 + terning2
+
+# Beregn sannsynligheten for at summen er over 9
+antall_vinn = np.sum(sum_terninger >= 9)
+sannsynlighet_vinn = antall_vinn / sims
+
+# Visualiser resultatene
+plt.figure(figsize=(10, 6))
+plt.hist(sum_terninger, bins=range(2, 14), density=True, alpha=0.75, color='darkblue', edgecolor='black')
+plt.axvline(9, color='r', linestyle='dashed', linewidth=2)
+plt.title('Fordeling av summene av to terningkast')
+plt.xlabel('Sum av to terninger')
+plt.ylabel('Frekvens')
+plt.grid(False)
+plt.show()
+
+# Print resultatene
+print(f"Sannsynligheten for at summen av to terninger er over eller lik 9: {sannsynlighet_vinn:.4f}")
+```
+
+## Oppgave 5.2
+
+Finn ut hvor mange kast av to terninger må du ta ($n$) for at sannsynligheten for å få en sum over eller lik $9$ minst én gang er over $90$%. 
+
+Hint - formelen for å finne sannsynligheten for at summen er over eller lik 9, minst én gang er gitt som følgende:
+$$P(\text{summen} \geq 9 \text{ minst én gang}) = 1 - \left(P(\text{summen} < 9)\right)^n$$
+
+hvor $P\left(\text{summen} < 9\right)$ kan finnes fra simuleringen over.
+
+Bruk ```sympy``` for å løse dette problemet, og si hvor mange ganger ($n$) vi må trille terningen.
+
+## Oppgave 5.2 LF
+
+
+```{.python}
+# Oppgave 5.2
+import sympy as sp
+import numpy as np
+import math
+
+# Definer variabelen som representerer summen av terningkastene
+n = sp.symbols('n')
+
+# Sannsynligheten for at summen er under 9 (fra simulering i oppgave 2.1):
+P_under_9 = 1 - sannsynlighet_vinn
+
+# Vi ønsker å løse følgende likning for n:
+# 1 - (P_under_9)^n = 0.9
+likning = 1 - (P_under_9)**n - 0.9
+
+# Løs likningen for n
+løsning = sp.solve(likning, n)
+
+# Vi runder opp svaret, da hvis det er 7,09 --> må det minst være 8 kast for å få 90% eller høyere sannsynlighet. I tillegg, gir ikke 7,09 kast mening og må avrundes.
+round_up_answer = math.ceil(løsning[0])
+
+# Printer svaret
+print(f"Antall kast n må være minst: {round_up_answer}")
+```
