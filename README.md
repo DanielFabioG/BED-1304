@@ -2,7 +2,7 @@
 
 For studenter kan dere laste ned oppgavene dere jobber med her:
 
-- 1 [Funksjoner](https://raw.githubusercontent.com/DanielFabioG/BED-1304/main/Oppgaver/Funksjoner.ipynb)
+- 1 [Funksjoner](sha256:1a8eb38da347c3b03296cf4551f83fb83ef3957fff10e6f1b9f60fe62a88ad73)
 - 2 [Lister, oppslag og numpy](https://raw.githubusercontent.com/DanielFabioG/BED-1304/main/Oppgaver/Lister_Dict_Numpy.ipynb)
 - 3 [Pandas](https://raw.githubusercontent.com/DanielFabioG/BED-1304/main/Oppgaver/Pandas_og_databehandling.ipynb)
 - 4 [Logikk og løkker](https://raw.githubusercontent.com/DanielFabioG/BED-1304/main/Oppgaver/Logikk_løkker.ipynb)
