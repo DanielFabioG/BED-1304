@@ -1,0 +1,1461 @@
+---
+title: "BED-1304 Python"
+subtitle: "Fagdag – prøveeksamen"
+date: last-modified
+date-format: "DD-MM-YYYY"
+format:
+  revealjs:
+    theme: dark
+    title-slide: false
+    slide-level: 2
+    width: 1280
+    height: 720
+    margin: 0.07
+    center: false
+    auto-stretch: false
+    slide-number: c/t
+    transition: fade
+    navigation-mode: linear
+    controls: true
+    progress: true
+    history: true
+    hash: true
+    embed-resources: true
+    preview-links: false
+    include-in-header:
+      text: |
+        <style>
+        .reveal { font-family: Arial, Helvetica, sans-serif; font-size: 30px; color: #f2f4f7; }
+        .reveal h1, .reveal h2, .reveal h3 { font-family: Arial, Helvetica, sans-serif; text-transform: none; font-weight: 600; color: #f2f4f7; }
+        .reveal h2 { font-size: 1.55em; margin-bottom: 0.65em; }
+        .reveal h3 { font-size: 1.05em; color: #8ad6d0; margin-bottom: 0.4em; }
+        .reveal p, .reveal li { line-height: 1.35; }
+        .reveal li { margin-bottom: 0.5em; }
+        .reveal strong { color: #8ad6d0; }
+        .reveal .columns { display: flex; gap: 2em; }
+        .reveal .column { min-width: 0; }
+        .reveal table { font-size: 0.8em; width: 100%; margin: 0.65em 0; }
+        .reveal table th { color: #8ad6d0; border-bottom: 2px solid #8ad6d0; }
+        .reveal table td, .reveal table th { padding: 0.55em 0.5em; vertical-align: top; }
+        .reveal .source { font-size: 0.52em; color: #bbc4d0; margin-top: 1.1em; }
+        .reveal .lead { font-size: 1.32em; line-height: 1.35; margin: 1em 0; }
+        .reveal .equation { font-family: Georgia, serif; font-size: 1.11em; padding: 0.55em 0; }
+        .reveal .small { font-size: 0.67em; }
+        .reveal a { color: #8ad6d0; }
+        .reveal .evidence { width: 100%; background: white; margin: 0; }
+        .reveal pre { margin: 0.35em 0; width: 100%; box-shadow: none; }
+        .reveal pre code { font-size: 0.75em; line-height: 1.18; max-height: 455px; }
+        .reveal .answer { margin-top: 0.8em; padding: 0.45em 0.65em; border-left: 4px solid #8ad6d0; background: #202d35; }
+        .reveal .compact p, .reveal .compact li { line-height: 1.22; margin-bottom: 0.3em; }
+        .reveal .compact table { font-size: 0.8em; }
+        .reveal .compact pre code { font-size: 0.72em; }
+        </style>
+---
+
+
+## Fagdag – prøveeksamen
+
+<p class="lead">Vi løser oppgavene sammen.</p>
+
+**Mandag 12:15–16:00** - BED-1304 Python
+
+- **30 % flervalg**
+- **40 % kortsvar**
+- **30 % programmering**
+
+::: notes
+Start kl. 12:15. Seminarledernes prøveeksamen.
+:::
+
+
+## Plan for fagdagen
+
+| Klokkeslett | Innhold |
+|:--|:--|
+| 12:15–13:00 | Oppsett + flervalg 1.1–1.15 |
+| **13:00–13:15** | **Pause** |
+| 13:15–14:00 | Flervalg 1.16–1.30 + kortsvar 2.1–2.2 |
+| **14:00–14:15** | **Pause** |
+| 14:15–15:00 | Kortsvar 2.3–2.8 |
+| **15:00–15:15** | **Pause** |
+| 15:15–16:00 | Programmering 3.1–3.2 + oppsummering |
+
+::: notes
+Ca. 180 minutter faglig arbeid og tre pauser på 15 minutter. Tidsplanen styres av klokkeslettet.
+:::
+
+
+## Slik jobber vi
+
+- Last ned **Prøveeksamen (fagdag)**-notatblokken via canvas.
+- **Tenk selv først** – vis løsningsforslaget ved neste klikk.
+- I WISEflow må koden kunne vurderes **uten å kjøres**.
+- Sikre grunnleggende poeng: riktig fremgangsmåte, innrykk og variabler.
+
+::: notes
+Bruk 4–5 minutter på intro og rutiner samlet, deretter flervalg. Ingen nye oppgaver her.
+:::
+
+
+## Del 1 – Flervalg (30 %)
+
+**30 spørsmål - 1 poeng per spørsmål**
+
+Velg ett riktig svar (a, b, c eller d).
+
+::: notes
+Kl. ca. 12:20. Økt 1: spørsmål 1.1–1.15, ca. 2–3 min per spørsmål.
+:::
+
+
+## Flervalg 1.1 - 1 poeng
+
+Hva skriver `print(type("3.5"))` ut?
+
+a) `<class 'str'>`  
+b) `<class 'bool'>`  
+c) `<class 'float'>`  
+d) `<class 'int'>`
+
+::: {.fragment .answer}
+**Riktig svar: a)** – Hermetegnene gjør verdien til tekst, selv om innholdet ser ut som et tall.
+:::
+
+::: notes
+**Veiledende tid:** 12:20–13:00 (ca. 2–3 min per spørsmål). La studentene prøve før fasit vises; gå videre når hovedpoenget er tydelig.
+:::
+
+
+## Flervalg 1.2 - 1 poeng
+
+Hva blir resultatet av `int(7.9)`?
+
+a) 8  
+b) 7.9  
+c) 7  
+d) Error
+
+::: {.fragment .answer}
+**Riktig svar: c)** – `int()` kutter desimalene, den runder ikke av.
+:::
+
+::: notes
+**Veiledende tid:** 12:20–13:00 (ca. 2–3 min per spørsmål). La studentene prøve før fasit vises; gå videre når hovedpoenget er tydelig.
+:::
+
+
+## Flervalg 1.3 - 1 poeng
+
+Hva skriver `print(17 % 5)` ut?
+
+a) 12  
+b) 3.4  
+c) 2  
+d) 3
+
+::: {.fragment .answer}
+**Riktig svar: c)** – Modulo gir resten: 17 = 3·5 + 2.
+:::
+
+::: notes
+**Veiledende tid:** 12:20–13:00 (ca. 2–3 min per spørsmål). La studentene prøve før fasit vises; gå videre når hovedpoenget er tydelig.
+:::
+
+
+## Flervalg 1.4 - 1 poeng
+
+Brukeren skriver inn `25` når koden `alder = input("Alder: ")` kjøres. Hvilken datatype har `alder`?
+
+a) `str`  
+b) `float`  
+c) Det avhenger av hva brukeren skriver  
+d) `int`
+
+::: {.fragment .answer}
+**Riktig svar: a)** – `input()` gir alltid tekst. Den må konverteres med `int()`/`float()` før man regner med den.
+:::
+
+::: notes
+**Veiledende tid:** 12:20–13:00 (ca. 2–3 min per spørsmål). La studentene prøve før fasit vises; gå videre når hovedpoenget er tydelig.
+:::
+
+
+## Flervalg 1.5 - 1 poeng
+
+Gitt `pris = 1234.5678`. Hva skriver `print(f"{pris:.2f}")` ut?
+
+a) 1234.5678  
+b) 1235  
+c) 1234.56  
+d) 1234.57
+
+::: {.fragment .answer}
+**Riktig svar: d)**
+:::
+
+::: notes
+**Veiledende tid:** 12:20–13:00 (ca. 2–3 min per spørsmål). La studentene prøve før fasit vises; gå videre når hovedpoenget er tydelig.
+:::
+
+
+## Flervalg 1.6 - 1 poeng
+
+Hva skriver `print(not (5 > 3) or 2 == 2)` ut?
+
+a) Error  
+b) `True`  
+c) `False`  
+d) `None`
+
+::: {.fragment .answer}
+**Riktig svar: b)** – `not True` blir `False`, og `False or True` blir `True`.
+:::
+
+::: notes
+**Veiledende tid:** 12:20–13:00 (ca. 2–3 min per spørsmål). La studentene prøve før fasit vises; gå videre når hovedpoenget er tydelig.
+:::
+
+
+## Flervalg 1.7 - 1 poeng
+
+Gitt `def rente(belop, sats): return belop * sats`. I kallet `rente(1000, 0.05)`, hva er `1000` og `0.05`?
+
+a) Parametere  
+b) Argumenter  
+c) Nøkkelord  
+d) Returverdier
+
+::: {.fragment .answer}
+**Riktig svar: b)** – Parametere står i `def`-linjen, argumenter er verdiene som sendes inn i kallet.
+:::
+
+::: notes
+**Veiledende tid:** 12:20–13:00 (ca. 2–3 min per spørsmål). La studentene prøve før fasit vises; gå videre når hovedpoenget er tydelig.
+:::
+
+
+## Flervalg 1.8 - 1 poeng
+
+::: {.compact}
+
+Hva skriver koden ut?
+```python
+def pris_med_mva(pris):
+    return pris * 1.25
+
+print(pris_med_mva(200))
+```
+
+a) 200  
+b) Error  
+c) `None`  
+d) 250.0
+
+::: {.fragment .answer}
+**Riktig svar: d)** – `return` sender verdien tilbake, og `print` viser den. Svaret blir et desimaltall fordi 1.25 er en float.
+:::
+
+:::
+
+::: notes
+**Veiledende tid:** 12:20–13:00 (ca. 2–3 min per spørsmål). La studentene prøve før fasit vises; gå videre når hovedpoenget er tydelig.
+:::
+
+
+## Flervalg 1.9 - 1 poeng
+
+Hva skriver `print(abs(-4.5) + max(1, 7, 3))` ut?
+
+a) 8  
+b) -11.5  
+c) 11.5  
+d) 2.5
+
+::: {.fragment .answer}
+**Riktig svar: c)**
+:::
+
+::: notes
+**Veiledende tid:** 12:20–13:00 (ca. 2–3 min per spørsmål). La studentene prøve før fasit vises; gå videre når hovedpoenget er tydelig.
+:::
+
+
+## Flervalg 1.10 - 1 poeng
+
+Gitt `aksjer = ["EQNR", "DNB", "YAR", "TEL"]`. Hva er `aksjer[-2]`?
+
+a) `"TEL"`  
+b) `"YAR"`  
+c) `"DNB"`  
+d) Error
+
+::: {.fragment .answer}
+**Riktig svar: b)**
+:::
+
+::: notes
+**Veiledende tid:** 12:20–13:00 (ca. 2–3 min per spørsmål). La studentene prøve før fasit vises; gå videre når hovedpoenget er tydelig.
+:::
+
+
+## Flervalg 1.11 - 1 poeng
+
+Med samme liste `aksjer`, hva gir `aksjer[1:3]`?
+
+a) `['DNB', 'YAR', 'TEL']`  
+b) `['EQNR', 'DNB', 'YAR']`  
+c) `['DNB', 'YAR']`  
+d) `['YAR']`
+
+::: {.fragment .answer}
+**Riktig svar: c)** – Sluttindeksen er ikke med.
+:::
+
+::: notes
+**Veiledende tid:** 12:20–13:00 (ca. 2–3 min per spørsmål). La studentene prøve før fasit vises; gå videre når hovedpoenget er tydelig.
+:::
+
+
+## Flervalg 1.12 - 1 poeng
+
+::: {.compact}
+
+Hva skriver koden ut?
+```python
+lst = [1, 2]
+lst.append([3, 4])
+print(len(lst))
+```
+
+a) Error  
+b) 3  
+c) 4  
+d) 2
+
+::: {.fragment .answer}
+**Riktig svar: b)** – `append` legger til hele listen som ETT element. Med `extend` hadde svaret blitt 4.
+:::
+
+:::
+
+::: notes
+**Veiledende tid:** 12:20–13:00 (ca. 2–3 min per spørsmål). La studentene prøve før fasit vises; gå videre når hovedpoenget er tydelig.
+:::
+
+
+## Flervalg 1.13 - 1 poeng
+
+::: {.compact}
+
+Hva skjer når koden kjøres?
+```python
+t = (100, 200)
+t[0] = 150
+```
+
+a) `t` blir `(150, 200)`  
+b) Python gir en `TypeError`  
+c) Python gir en `SyntaxError`  
+d) `t` blir `(100, 200, 150)`
+
+::: {.fragment .answer}
+**Riktig svar: b)** – Tupler er immutable.
+:::
+
+:::
+
+::: notes
+**Veiledende tid:** 12:20–13:00 (ca. 2–3 min per spørsmål). La studentene prøve før fasit vises; gå videre når hovedpoenget er tydelig.
+:::
+
+
+## Flervalg 1.14 - 1 poeng
+
+::: {.compact}
+
+Hva skriver koden ut?
+```python
+kurser = {"EQNR": 295.5, "DNB": 210.0}
+kurser["YAR"] = 350.2
+print(len(kurser))
+```
+
+a) 3  
+b) 6  
+c) 2  
+d) Error
+
+::: {.fragment .answer}
+**Riktig svar: a)**
+:::
+
+:::
+
+::: notes
+**Veiledende tid:** 12:20–13:00 (ca. 2–3 min per spørsmål). La studentene prøve før fasit vises; gå videre når hovedpoenget er tydelig.
+:::
+
+
+## Flervalg 1.15 - 1 poeng
+
+Hva er resultatet av `np.array([10, 20, 30]) + 5`?
+
+a) `[10, 20, 30, 5]`  
+b) Error  
+c) 65  
+d) `[15 25 35]`
+
+::: {.fragment .answer}
+**Riktig svar: d)** – Vektorisering: operasjonen gjøres på hvert element.
+:::
+
+::: notes
+**Veiledende tid:** 12:20–13:00 (ca. 2–3 min per spørsmål). La studentene prøve før fasit vises; gå videre når hovedpoenget er tydelig.
+:::
+
+
+## Pause · 13:00–13:15
+
+<p class="lead">Vi fortsetter kl. 13:15.</p>
+
+Neste: **flervalg 1.16–1.30**.
+
+::: notes
+Avslutt innen kl. 13:00. Start igjen 13:15.
+:::
+
+
+## Økt 2 – 13:15–14:00
+
+**Flervalg 1.16–1.30**, deretter **kortsvar 2.1 og 2.2**.
+
+::: notes
+Fortsett kl. 13:15. Mål: ferdig med flervalg omtrent 13:45.
+:::
+
+
+## Flervalg 1.16 - 1 poeng
+
+Hva kalles én enkelt kolonne i en pandas DataFrame?
+
+a) En dictionary  
+b) En Series  
+c) En tuple  
+d) En NumPy-matrise
+
+::: {.fragment .answer}
+**Riktig svar: b)**
+:::
+
+::: notes
+**Veiledende tid:** 13:15–13:45 (ca. 2 min per spørsmål). La studentene prøve før fasit vises; gå videre når hovedpoenget er tydelig.
+:::
+
+
+## Flervalg 1.17 - 1 poeng
+
+Hvilken kode beholder kun radene der kolonnen `"Pris"` er større enn 100?
+
+a) `df["Pris" > 100]`  
+b) `df[df > 100]["Pris"]`  
+c) `df[df["Pris"] > 100]`  
+d) `df.filter(Pris > 100)`
+
+::: {.fragment .answer}
+**Riktig svar: c)**
+:::
+
+::: notes
+**Veiledende tid:** 13:15–13:45 (ca. 2 min per spørsmål). La studentene prøve før fasit vises; gå videre når hovedpoenget er tydelig.
+:::
+
+
+## Flervalg 1.18 - 1 poeng
+
+Hva gir `df.sort_values(by="BNP", ascending=False).head(3)`?
+
+a) De tre radene med lavest BNP  
+b) De tre første radene, usortert  
+c) Kolonnenavnene sortert alfabetisk  
+d) De tre radene med høyest BNP
+
+::: {.fragment .answer}
+**Riktig svar: d)**
+:::
+
+::: notes
+**Veiledende tid:** 13:15–13:45 (ca. 2 min per spørsmål). La studentene prøve før fasit vises; gå videre når hovedpoenget er tydelig.
+:::
+
+
+## Flervalg 1.19 - 1 poeng
+
+Gitt `df = pd.DataFrame({"Vare": ["A", "B", "C"], "Pris": [100, 200, 300]})`. Hva skriver `print(df["Pris"].mean())` ut?
+
+a) 200.0  
+b) 300  
+c) 3  
+d) 600
+
+::: {.fragment .answer}
+**Riktig svar: a)** – `mean()` gir gjennomsnittet. 600 er `sum()`, 3 er `len(df)` og 300 er `max()`.
+:::
+
+::: notes
+**Veiledende tid:** 13:15–13:45 (ca. 2 min per spørsmål). La studentene prøve før fasit vises; gå videre når hovedpoenget er tydelig.
+:::
+
+
+## Flervalg 1.20 - 1 poeng
+
+Hva gjør `df.info()`?
+
+a) Fjerner rader med manglende verdier  
+b) Gir gjennomsnitt, standardavvik, min og maks  
+c) Viser de fem første radene  
+d) Viser antall rader, kolonner og datatypene i datasettet
+
+::: {.fragment .answer}
+**Riktig svar: d)** – Ikke forveksle med `df.describe()` (statistikk) og `df.head()` (første rader).
+:::
+
+::: notes
+**Veiledende tid:** 13:15–13:45 (ca. 2 min per spørsmål). La studentene prøve før fasit vises; gå videre når hovedpoenget er tydelig.
+:::
+
+
+## Flervalg 1.21 - 1 poeng
+
+::: {.compact}
+
+Hva skriver koden ut?
+```python
+pris = 150
+if pris > 100:
+    print("A")
+elif pris > 140:
+    print("B")
+else:
+    print("C")
+```
+
+a) Bare `B`  
+b) Bare `A`  
+c) Bare `C`  
+d) `A` og `B`
+
+::: {.fragment .answer}
+**Riktig svar: b)** – Python stopper ved første betingelse som er `True`, selv om `elif` også er sann.
+:::
+
+:::
+
+::: notes
+**Veiledende tid:** 13:15–13:45 (ca. 2 min per spørsmål). La studentene prøve før fasit vises; gå videre når hovedpoenget er tydelig.
+:::
+
+
+## Flervalg 1.22 - 1 poeng
+
+::: {.compact}
+
+Hva skriver koden ut?
+```python
+total = 0
+for i in range(1, 5):
+    total += i
+print(total)
+```
+
+a) 10  
+b) 4  
+c) 5  
+d) 15
+
+::: {.fragment .answer}
+**Riktig svar: a)** – `range(1, 5)` gir 1, 2, 3, 4.
+:::
+
+:::
+
+::: notes
+**Veiledende tid:** 13:15–13:45 (ca. 2 min per spørsmål). La studentene prøve før fasit vises; gå videre når hovedpoenget er tydelig.
+:::
+
+
+## Flervalg 1.23 - 1 poeng
+
+::: {.compact}
+
+Hva skjer når koden kjøres?
+```python
+i = 1
+while i < 5:
+    print(i)
+```
+
+a) Ingenting skrives ut  
+b) Løkken går i det uendelige  
+c) Python gir en feilmelding  
+d) Tallene 1–4 skrives ut
+
+::: {.fragment .answer}
+**Riktig svar: b)** – `i` endres aldri, så `i < 5` er alltid `True`. (Ikke kjør denne!)
+:::
+
+:::
+
+::: notes
+**Veiledende tid:** 13:15–13:45 (ca. 2 min per spørsmål). La studentene prøve før fasit vises; gå videre når hovedpoenget er tydelig. Ikke kjør eksempelkoden som har en uendelig løkke.
+:::
+
+
+## Flervalg 1.24 - 1 poeng
+
+::: {.compact}
+
+Hvor mange ganger kjører løkken?
+```python
+frukt = ["eple", "banan", "appelsin"]
+for f in frukt:
+    print(f)
+```
+
+a) 2  
+b) 1  
+c) 3  
+d) Den gir feil
+
+::: {.fragment .answer}
+**Riktig svar: c)** – Løkken kjører én gang per element i listen.
+:::
+
+:::
+
+::: notes
+**Veiledende tid:** 13:15–13:45 (ca. 2 min per spørsmål). La studentene prøve før fasit vises; gå videre når hovedpoenget er tydelig.
+:::
+
+
+## Flervalg 1.25 - 1 poeng
+
+Du vil undersøke om det er en sammenheng mellom reklamebudsjett og salg for 50 butikker (ikke over tid). Hvilken figur passer best?
+
+a) `plt.pie()`  
+b) `plt.hist()`  
+c) `plt.scatter()`  
+d) `plt.plot()`
+
+::: {.fragment .answer}
+**Riktig svar: c)**
+:::
+
+::: notes
+**Veiledende tid:** 13:15–13:45 (ca. 2 min per spørsmål). La studentene prøve før fasit vises; gå videre når hovedpoenget er tydelig.
+:::
+
+
+## Flervalg 1.26 - 1 poeng
+
+Hva gjør `plt.ylim(0, 1200)`?
+
+a) Låser y-aksen til å gå fra 0 til 1200  
+b) Lager en vannrett linje ved y = 1200  
+c) Tegner 1200 punkter  
+d) Setter figurstørrelsen
+
+::: {.fragment .answer}
+**Riktig svar: a)** – Brukes for å unngå villedende grafer der y-aksen ikke starter på 0.
+:::
+
+::: notes
+**Veiledende tid:** 13:15–13:45 (ca. 2 min per spørsmål). La studentene prøve før fasit vises; gå videre når hovedpoenget er tydelig.
+:::
+
+
+## Flervalg 1.27 - 1 poeng
+
+Gitt `x = sp.Symbol('x')`. Hva returnerer `sp.solve(2*x - 10, x)`?
+
+a) `5.0`  
+b) `x = 5`  
+c) `[10]`  
+d) `[5]`
+
+::: {.fragment .answer}
+**Riktig svar: d)** – `solve` returnerer en liste med løsninger. Derfor bruker vi ofte `[0]`.
+:::
+
+::: notes
+**Veiledende tid:** 13:15–13:45 (ca. 2 min per spørsmål). La studentene prøve før fasit vises; gå videre når hovedpoenget er tydelig.
+:::
+
+
+## Flervalg 1.28 - 1 poeng
+
+Gitt `x = sp.Symbol('x')`. Hva returnerer `sp.integrate(2*x, (x, 0, 3))`?
+
+a) 6  
+b) 3  
+c) `x**2`  
+d) 9
+
+::: {.fragment .answer}
+**Riktig svar: d)** – Bestemt integral: x² fra 0 til 3 = 9.
+:::
+
+::: notes
+**Veiledende tid:** 13:15–13:45 (ca. 2 min per spørsmål). La studentene prøve før fasit vises; gå videre når hovedpoenget er tydelig.
+:::
+
+
+## Flervalg 1.29 - 1 poeng
+
+Hvilke verdier kan `np.random.randint(1, 7, size=5)` gi?
+
+a) Heltall fra 1 til og med 6  
+b) Heltall fra 1 til og med 7  
+c) Heltall fra 0 til og med 6  
+d) Desimaltall mellom 1 og 7
+
+::: {.fragment .answer}
+**Riktig svar: a)** – Stopp-verdien er ikke inkludert, slik som i `range`.
+:::
+
+::: notes
+**Veiledende tid:** 13:15–13:45 (ca. 2 min per spørsmål). La studentene prøve før fasit vises; gå videre når hovedpoenget er tydelig.
+:::
+
+
+## Flervalg 1.30 - 1 poeng
+
+Hvilken funksjon trekker tall der alle verdier i et intervall har like stor sannsynlighet?
+
+a) `np.random.uniform()`  
+b) `np.random.normal()`  
+c) `np.random.seed()`  
+d) `np.mean()`
+
+::: {.fragment .answer}
+**Riktig svar: a)**
+:::
+
+::: notes
+**Veiledende tid:** 13:15–13:45 (ca. 2 min per spørsmål). La studentene prøve før fasit vises; gå videre når hovedpoenget er tydelig.
+:::
+
+
+## Del 2 – Kortsvar (40 %)
+
+**8 oppgaver · 5 poeng per oppgave**
+
+Svar kort og presist; vis hva koden gjør.
+
+::: notes
+Mål: oppgave 2.1 og 2.2 før kl. 14:00, resten etter pausen.
+:::
+
+
+## Oppgave 2.1 – Hva blir output? (5 p)
+
+::: {.compact}
+
+Skriv hva hver linje skriver ut. 1 poeng per deloppgave.
+
+```python
+# a)
+print("5" + "5")
+# b)
+print([1, 2] * 2)
+# c)
+print(np.array([1, 2]) * 2)
+# d)
+a = 7
+a += 3
+a = a // 4
+print(a)
+# e)
+print(type(10 > 3))
+```
+
+:::
+
+::: notes
+13:45–13:52. Studentene prøver del a–e før løsningssliden.
+:::
+
+
+## Fasit 2.1
+
+a) `55` (tekst limes sammen) · b) `[1, 2, 1, 2]` (listen gjentas) · c) `[2 4]` (vektorisert) · d) `2` (10 // 4) · e) `<class 'bool'>`
+
+::: notes
+Vis forskjellen på Python-lister og NumPy-arrays.
+:::
+
+
+## Oppgave 2.2 – return vs. print (5 p)
+
+::: {.compact}
+
+En kollega har skrevet koden under for å summere MVA for tre varer:
+
+```python
+def beregn_mva(pris):
+    mva = pris * 0.25
+    print(mva)
+
+total = 0
+for pris in [100, 200, 400]:
+    total = total + beregn_mva(pris)
+print(total)
+```
+
+a) Hva skrives ut før programmet krasjer, og hvilken feilmelding får vi? (2 p)
+b) Forklar hvorfor programmet krasjer. (2 p)
+c) Rett opp koden. Hva blir `total` etter rettingen? (1 p)
+
+:::
+
+::: notes
+13:52–14:00. Forklar hvorfor print ikke er return.
+:::
+
+
+## Fasit 2.2 – Feilen
+
+::: {.compact}
+
+**a)** `25.0` skrives ut, deretter `TypeError: unsupported operand type(s) for +: 'int' and 'NoneType'`.
+
+**b)** Funksjonen bruker `print` og ingen `return`, så den returnerer `None`. `print` viser bare tallet på skjermen, verdien sendes ikke tilbake. `0 + None` går ikke.
+
+**c)** Bytt `print(mva)` med `return mva`. `total` blir `175.0`.
+
+:::
+
+::: notes
+Vis 25.0, None og TypeError; rettingen er på neste slide.
+:::
+
+
+## Fasit 2.2 – Rettet kode
+
+::: {.compact}
+
+```python
+def beregn_mva(pris):
+    mva = pris * 0.25
+    return mva
+
+total = 0
+for pris in [100, 200, 400]:
+    total = total + beregn_mva(pris)
+print(total)
+```
+
+**Total MVA: 175.0**
+
+:::
+
+::: notes
+Gå til pausen kl. 14:00.
+:::
+
+
+## Pause - 14:00–14:15
+
+<p class="lead">Vi fortsetter kl. 14:15.</p>
+
+Neste: **kortsvar 2.3–2.8**.
+
+::: notes
+Avslutt innen 14:00, selv om noe kortsvar gjenstår.
+:::
+
+
+## Økt 3 – 14:15–15:00
+
+**Kortsvar 2.3–2.8**
+
+Spor variabler, finn feil og forklar kode.
+
+::: notes
+Start 14:15. Fordel ca. 7–8 minutter på hver av de seks kortsvarsoppgavene.
+:::
+
+
+## Oppgave 2.3 – Sporing av en while-løkke (5 p)
+
+::: {.compact}
+
+```python
+saldo = 10000
+rente = 0.10
+aar = 0
+
+while saldo < 13000:
+    saldo = saldo * (1 + rente)
+    aar += 1
+    print(aar, round(saldo))
+
+print(f"Ferdig etter {aar} år")
+```
+
+a) Fyll ut tabellen for hver runde i løkken (3 p):
+
+| Runde | `saldo < 13000` før runden? | `saldo` etter runden | `aar` |
+|---|---|---|---|
+| 1 | | | |
+| 2 | | | |
+| 3 | | | |
+| 4 | | | |
+
+b) Hva skjer hvis `rente = 0`? Hvorfor? (2 p)
+
+:::
+
+::: notes
+14:15–14:22. La dem følge saldo og kontrollere betingelsen før hver runde.
+:::
+
+
+## Fasit 2.3 – Løkken
+
+::: {.compact}
+
+**a)**
+
+| Runde | `saldo < 13000` før runden? | `saldo` etter runden | `aar` |
+|---|---|---|---|
+| 1 | True (10000) | 11000 | 1 |
+| 2 | True (11000) | 12100 | 2 |
+| 3 | True (12100) | 13310 | 3 |
+| 4 | False (13310) | løkken kjører ikke | – |
+
+Hele utskriften: `1 11000`, `2 12100`, `3 13310`, `Ferdig etter 3 år`.
+
+**b)** Saldoen blir aldri større enn 10000, så betingelsen er alltid `True` og løkken går i det uendelige (`1 10000`, `2 10000`, … uten stopp). Kan sikres med f.eks. `and aar < 100` i betingelsen, eller en `if`-sjekk på forhånd.
+
+:::
+
+::: notes
+Vis at runde 4 ikke kjører; ved nullrente stopper løkken aldri.
+:::
+
+
+## Oppgave 2.4 – Pseudokode og if/elif/else (5 p)
+
+::: {.compact}
+
+En nettbutikk skal beregne frakt for en ordre. Reglene er:
+
+- Ordrer på 1000 kr eller mer får gratis frakt (0 kr).
+- Ordrer fra og med 500 kr (men under 1000 kr) betaler 49 kr i frakt.
+- Alle andre ordrer betaler 99 kr i frakt.
+
+a) Skriv pseudokode for en funksjon `beregn_frakt(belop)`. (2 p)
+b) Skriv funksjonen i Python. Den skal **returnere** frakten. (2 p)
+c) Hva hadde gått galt hvis du sjekket `belop >= 500` *før* `belop >= 1000`? (1 p)
+
+:::
+
+::: notes
+14:22–14:29. Fokus: rekkefølge på if og elif.
+:::
+
+
+## Fasit 2.4 – Pseudokode
+
+::: {.compact}
+
+**a) Pseudokode**
+- Ta inn beløp
+- HVIS beløp ≥ 1000: returner 0
+- ELLERS HVIS beløp ≥ 500: returner 49
+- ELLERS: returner 99
+
+**c)** En ordre på f.eks. 1500 kr ville stoppet på `belop >= 500` og fått 49 kr i frakt. Python stopper ved første sanne betingelse, så den strengeste må stå først.
+
+:::
+
+::: notes
+La studentene si betingelsene høyt før Python-koden.
+:::
+
+
+## Fasit 2.4 – Python
+
+::: {.compact}
+
+```python
+def beregn_frakt(belop):
+    if belop >= 1000:
+        return 0
+    elif belop >= 500:
+        return 49
+    else:
+        return 99
+```
+
+:::
+
+::: notes
+Sammenlign med studentenes kode.
+:::
+
+
+## Oppgave 2.5 – Datasettet
+
+::: {.compact}
+
+En butikkjede har denne DataFrame-en `df`:
+
+| | Butikk | Region | Salg | Kostnad |
+|---|---|---|---|---|
+| 0 | Tromsø | Nord | 500 | 420 |
+| 1 | Bodø | Nord | 300 | 350 |
+| 2 | Bergen | Vest | 800 | NaN |
+| 3 | Oslo | Øst | 900 | 600 |
+| 4 | Alta | Nord | 200 | 150 |
+
+:::
+
+::: notes
+14:29–14:37. DataFrame i studentnotatblokken. Identifiser NaN og resultat per butikk.
+:::
+
+
+## Oppgave 2.5 – Les koden
+
+::: {.compact}
+
+```python
+df = df.dropna()
+df["Resultat"] = df["Salg"] - df["Kostnad"]
+lonnsomme = df[df["Resultat"] > 0]
+print(len(lonnsomme))
+print(df.groupby("Region")["Resultat"].sum())
+```
+
+a) Forklar kort hva hver av de tre første linjene gjør. (3 p)
+b) Hva skrives ut av de to `print`-linjene? (2 p)
+
+:::
+
+::: notes
+Studentene forklarer tre første linjer og beregner utskrift.
+:::
+
+
+## Fasit 2.5 – Pandas
+
+::: {.compact}
+
+**a)**
+1. `dropna()` fjerner rader med minst én manglende verdi (Bergen forsvinner).
+2. Lager en ny kolonne `Resultat` = Salg − Kostnad, regnet ut for alle rader samtidig.
+3. Filtrerer: beholder bare radene der `Resultat > 0` (boolsk maske).
+
+**b)** `3` (Tromsø 80, Oslo 300, Alta 50; Bodø har −50). Deretter: Nord `80` (80 − 50 + 50), Øst `300`. Vest er borte fordi Bergen ble fjernet.
+
+:::
+
+::: notes
+Vis Bergen bortfaller, tre lønnsomme, Nord=80 og Øst=300.
+:::
+
+
+## Oppgave 2.6 – SymPy: markedslikevekt (5 p)
+
+::: {.compact}
+
+Invers tilbud og etterspørsel er gitt ved
+
+- Tilbud: $P = 10 + 2Q$
+- Etterspørsel: $P = 100 - Q$
+
+a) Skriv SymPy-koden som finner likevektsmengden $Q^*$. Bruk `sp.Symbol`, `sp.Eq` og `sp.solve`. (3 p)
+b) Bruk `.subs()` til å finne likevektsprisen $P^*$. (1 p)
+c) Hva blir $Q^*$ og $P^*$? (1 p)
+
+:::
+
+::: notes
+14:37–14:44. SymPy og markedslikevekt.
+:::
+
+
+## Fasit 2.6 – SymPy
+
+::: {.compact}
+
+```python
+Q = sp.Symbol('Q')
+tilbud = 10 + 2*Q
+ettersporsel = 100 - Q
+
+# a)
+Q_stjerne = sp.solve(sp.Eq(tilbud, ettersporsel), Q)[0]
+
+# b)
+P_stjerne = ettersporsel.subs(Q, Q_stjerne)
+
+print(f"Q* = {Q_stjerne}, P* = {P_stjerne}")
+```
+
+**$Q^*=30$, $P^*=70$.**
+
+:::
+
+::: notes
+Vis sp.Eq, sp.solve, [0] og subs.
+:::
+
+
+## Oppgave 2.7 – Feilsøking (5 p)
+
+::: {.compact}
+
+Koden skal regne ut lønn etter skatt for 37,5 timer à 250 kr med 25 % skatt. Den inneholder **fem feil**.
+
+```python
+def lonn_etter_skatt(timer, timelonn, skattesats)
+    brutto = timer * timelonn
+    if brutto = 0:
+        print("Ingen lønn")
+        netto = 0
+    else:
+        netto = brutto * (1 - skattesats)
+  return netto
+
+resultat = lonn_etter_skatt(37.5, 250, 25)
+print("Utbetalt: " + resultat + " kr")
+```
+
+Finn de fem feilene. For hver feil: si om det er en syntaksfeil, en kjøretidsfeil (f.eks. `TypeError`) eller en logisk feil, og vis hvordan den rettes. (1 p per feil)
+
+:::
+
+::: notes
+14:44–14:52. Be studentene finne fem feil.
+:::
+
+
+## Fasit 2.7 – Fem feil
+
+::: {.compact}
+
+1. Mangler `:` etter `def`-linjen – **syntaksfeil**.
+2. `if brutto = 0:` skal være `==` – **syntaksfeil**.
+3. `return` har feil innrykk – **syntaksfeil** (`IndentationError`).
+4. `skattesats` sendes inn som `25` i stedet for `0.25` – **logisk feil** (gir netto = −225 000 kr, uten feilmelding).
+5. `"Utbetalt: " + resultat` blander tekst og tall – **kjøretidsfeil** (`TypeError`). Bruk f-streng.
+
+Riktig svar: `Utbetalt: 7031.25 kr`.
+
+:::
+
+::: notes
+Skill syntaksfeil, kjøretidsfeil og logiske feil.
+:::
+
+
+## Fasit 2.7 – Rettet kode
+
+::: {.compact}
+
+```python
+def lonn_etter_skatt(timer, timelonn, skattesats):
+    brutto = timer * timelonn
+    if brutto == 0:
+        print("Ingen lønn")
+        netto = 0
+    else:
+        netto = brutto * (1 - skattesats)
+    return netto
+
+resultat = lonn_etter_skatt(37.5, 250, 0.25)
+print(f"Utbetalt: {resultat:.2f} kr")
+```
+
+:::
+
+::: notes
+Forventet utskrift: 7031.25 kr.
+:::
+
+
+## Oppgave 2.8 – Simulering av terningkast (5 p)
+
+::: {.compact}
+
+```python
+np.random.seed(4)
+kast = np.random.randint(1, 7, size=600)
+
+antall_seksere = 0
+for k in kast:
+    if k == 6:
+        antall_seksere += 1
+
+print(f"Antall seksere: {antall_seksere}")
+print(f"Andel seksere: {antall_seksere / 600:.2f}")
+```
+
+a) Hvilke verdier kan `kast` inneholde, og hvor mange tall er det i `kast`? (1 p)
+b) Forklar hva `for`-løkken gjør. (2 p)
+c) Omtrent hvor mange seksere forventer du? Begrunn svaret. (1 p)
+d) Hva er hensikten med `np.random.seed(4)`? (1 p)
+
+:::
+
+::: notes
+14:52–15:00. Be om forventet antall seksere og formålet med seed.
+:::
+
+
+## Fasit 2.8 – Terningkast
+
+::: {.compact}
+
+**a)** Heltall fra 1 til og med 6 (7 er ikke med). `kast` inneholder 600 tall.
+
+**b)** Løkken går gjennom hvert kast. Hvis kastet er 6, øker telleren `antall_seksere` med 1. Til slutt har vi antall seksere totalt.
+
+**c)** Ca. 100, fordi sannsynligheten for en sekser er 1/6, og 600 / 6 = 100. Svaret blir sjelden nøyaktig 100 på grunn av tilfeldighet.
+
+**d)** Gjør trekningen replikerbar: samme «tilfeldige» tall hver gang koden kjøres.
+
+:::
+
+::: notes
+Tydeliggjør at 100 er forventet, ikke garantert. Pause kl. 15:00.
+:::
+
+
+## Pause · 15:00–15:15
+
+<p class="lead">Vi fortsetter kl. 15:15.</p>
+
+Neste: **programmeringsoppgaver 3.1–3.2**.
+
+::: notes
+Pause kl. 15:00–15:15.
+:::
+
+
+## Økt 4 – 15:15–16:00
+
+**Del 3: Programmering (30 %)**
+
+- Oppgave 3.1: nedbetaling av studielån (15 p)
+- Oppgave 3.2: analyse av aksjeportefølje (15 p)
+
+**Skriv koden som om den ikke kan kjøres.**
+
+::: notes
+Start 15:15. Ca. 19 minutter på 3.1, 24 minutter på 3.2, 2 minutter oppsummering.
+:::
+
+
+## Oppgave 3.1 – Studielån (15 p)
+
+::: {.compact}
+
+Du har et studielån og vil vite hvor mange år det tar å betale det ned.
+
+Hvert år skjer følgende:
+1. Det legges til renter på lånet: `laan = laan * (1 + rente)`
+2. Du betaler et fast årlig beløp, som trekkes fra lånet.
+
+Dette gjentas så lenge det er noe igjen av lånet (`laan > 0`).
+
+**Oppgave:**
+
+a) Skriv pseudokode for programmet. (3 p)
+
+b) Lag en funksjon `nedbetaling(laan, rente, aarlig_betaling)` som bruker en `while`-løkke og **returnerer** antall år det tar å betale ned lånet. (8 p)
+
+c) Kall funksjonen med et lån på 200 000 kr, 5 % rente og 25 000 kr i året. Skriv ut svaret med en f-streng, f.eks. `Lånet er nedbetalt etter X år.` (4 p)
+
+:::
+
+::: notes
+15:15–15:22: oppgave og pseudokode. Del a–c er de samme som i studentfilen.
+:::
+
+
+## Fasit 3.1 – Pseudokode
+
+::: {.compact}
+
+**a) Pseudokode**
+- Ta inn lån, rente og årlig betaling
+- Sett år = 0
+- SÅ LENGE lån > 0:
+  - legg til renter: lån = lån × (1 + rente)
+  - trekk fra betalingen: lån = lån − årlig betaling
+  - øk år med 1
+- Returner år
+
+:::
+
+::: notes
+15:22–15:26. Vektlegg rekkefølge: rente før betaling, øk år.
+:::
+
+
+## Fasit 3.1 – Python-kode
+
+::: {.compact}
+
+```python
+def nedbetaling(laan, rente, aarlig_betaling):
+    aar = 0
+
+    # Gjenta så lenge det er noe igjen av lånet
+    while laan > 0:
+        laan = laan * (1 + rente)      # legg til renter
+        laan = laan - aarlig_betaling  # trekk fra betalingen
+        aar += 1                       # ett år har gått
+
+    return aar
+
+
+# c)
+antall_aar = nedbetaling(200000, 0.05, 25000)
+print(f"Lånet er nedbetalt etter {antall_aar} år.")
+```
+
+**Forventet utskrift: Lånet er nedbetalt etter 11 år.**
+
+:::
+
+::: notes
+15:26–15:34. Sjekk while, oppdateringer, return og f-streng.
+:::
+
+
+## Oppgave 3.2 – Porteføljedata (15 p)
+
+::: {.compact}
+
+Du jobber som analytiker og har fått porteføljedata som en dictionary:
+
+```python
+data = {
+    "Ticker":      ["EQNR", "DNB", "MOWI", "YAR", "TEL", "NHY"],
+    "Antall":      [100, 150, 200, 40, 120, 300],
+    "Kjopskurs":   [280.0, 190.0, 205.0, 380.0, 140.0, 70.0],
+    "Dagens_kurs": [265.0, 225.0, 195.0, 410.0, np.nan, 78.0],
+}
+```
+
+:::
+
+::: notes
+15:34–15:38. Studentnotatblokkens data, med én manglende kurs.
+:::
+
+
+## Oppgave 3.2 – Del a–e
+
+::: {.compact}
+
+**Oppgave:**
+
+a) Lag en DataFrame `df` av dataene, og fjern aksjen som mangler dagens kurs. (3 p)
+
+b) Lag en ny kolonne `Markedsverdi` = Antall × Dagens kurs. (3 p)
+
+c) Skriv ut tickerne til aksjene der dagens kurs er **lavere** enn kjøpskursen (aksjer med tap). (3 p)
+
+d) Regn ut og skriv ut den samlede markedsverdien til porteføljen. (2 p)
+
+e) Lag et søylediagram (`plt.bar`) med ticker på x-aksen og markedsverdi på y-aksen. Figuren skal ha tittel og aksetitler. (4 p)
+
+:::
+
+::: notes
+15:38–15:44. La studentene skissere løsningen for a–e.
+:::
+
+
+## Fasit 3.2 – Del a og b
+
+::: {.compact}
+
+```python
+df = pd.DataFrame(data)
+df = df.dropna()
+
+# b)
+df["Markedsverdi"] = df["Antall"] * df["Dagens_kurs"]
+print(df)
+```
+
+**`TEL` faller bort fordi dagens kurs mangler.**
+
+:::
+
+::: notes
+15:44–15:49. Lag DataFrame, dropna og markedsverdi.
+:::
+
+
+## Fasit 3.2 – Del c og d
+
+::: {.compact}
+
+```python
+# c)
+tap = df[df["Dagens_kurs"] < df["Kjopskurs"]]
+print("\nAksjer med tap:", list(tap["Ticker"]))
+
+# d)
+total = df["Markedsverdi"].sum()
+print(f"\nSamlet markedsverdi: {total:.2f} kr")
+```
+
+**Aksjer med tap:** EQNR, MOWI  
+**Samlet markedsverdi:** 139 050 kr
+
+:::
+
+::: notes
+15:49–15:54. Diskuter filter og sum, sjekk tallene.
+:::
+
+
+## Fasit 3.2 – Del e
+
+::: {.compact}
+
+```python
+# e)
+plt.bar(df["Ticker"], df["Markedsverdi"])
+plt.title("Markedsverdi per aksje i porteføljen")
+plt.xlabel("Aksje (ticker)")
+plt.ylabel("Markedsverdi (NOK)")
+plt.show()
+```
+
+:::
+
+::: notes
+15:54–15:58. Vis plt.bar, tittel og aksetitler.
+:::
+
+
+## Oppsummering – 16:00
+
+- **Flervalg:** Les kode og velg ett riktig svar.
+- **Kortsvar:** Spor variabler, forklar resultater og feil.
+- **Programmering:** Begynn enkelt, skriv riktig innrykk, og kontroller logikken.
+
+**Takk for i dag!**
+
+::: notes
+Avslutt kl. 16:00.
+:::

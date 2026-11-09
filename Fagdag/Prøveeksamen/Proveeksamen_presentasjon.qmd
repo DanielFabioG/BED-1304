@@ -1,0 +1,654 @@
+---
+title: "BED-1304 Python"
+subtitle: "Fagdag – prøveeksamen"
+date: last-modified
+date-format: "DD-MM-YYYY"
+format:
+  revealjs:
+    theme: dark
+    title-slide: false
+    slide-level: 2
+    width: 1280
+    height: 720
+    margin: 0.07
+    center: false
+    auto-stretch: false
+    slide-number: c/t
+    transition: fade
+    navigation-mode: linear
+    controls: true
+    progress: true
+    history: true
+    hash: true
+    embed-resources: true
+    preview-links: false
+    include-in-header:
+      text: |
+        <style>
+        .reveal { font-family: Arial, Helvetica, sans-serif; font-size: 30px; color: #f2f4f7; }
+        .reveal h1, .reveal h2, .reveal h3 { font-family: Arial, Helvetica, sans-serif; text-transform: none; font-weight: 600; color: #f2f4f7; }
+        .reveal h2 { font-size: 1.55em; margin-bottom: 0.65em; }
+        .reveal h3 { font-size: 1.05em; color: #8ad6d0; margin-bottom: 0.4em; }
+        .reveal p, .reveal li { line-height: 1.35; }
+        .reveal li { margin-bottom: 0.5em; }
+        .reveal strong { color: #8ad6d0; }
+        .reveal .columns { display: flex; gap: 2em; }
+        .reveal .column { min-width: 0; }
+        .reveal table { font-size: 0.8em; width: 100%; margin: 0.65em 0; }
+        .reveal table th { color: #8ad6d0; border-bottom: 2px solid #8ad6d0; }
+        .reveal table td, .reveal table th { padding: 0.55em 0.5em; vertical-align: top; }
+        .reveal .source { font-size: 0.52em; color: #bbc4d0; margin-top: 1.1em; }
+        .reveal .lead { font-size: 1.32em; line-height: 1.35; margin: 1em 0; }
+        .reveal .equation { font-family: Georgia, serif; font-size: 1.11em; padding: 0.55em 0; }
+        .reveal .small { font-size: 0.67em; }
+        .reveal a { color: #8ad6d0; }
+        .reveal .evidence { width: 100%; background: white; margin: 0; }
+        </style>
+---
+
+
+## Oppsett – 4 timer
+
+| Tid | Del | Poeng |
+|:--|:--|--:|
+| 12:15–12:20 | Oppsett | – |
+| 12:20–13:00 | 10 Flervalgsspørsmål | 30 |
+| 13:00–13:15 | Pause | – |
+| 13:15–14:00 | 8 Kortsvarsoppgaver | 40 |
+| 14:00–14:15 | Pause | - | 
+| 14:15-15:00 | 3 Programmeringsoppgaver | 30 |
+| 15:00–15:15 | Pause | - |
+| 15:15-16:00 | Oppsummering og spørsmål | – |
+
+**Totalt 100 poeng – 30 % / 40 % / 30 %.**
+
+
+::: notes
+Tidsplanen er veiledende. Dette er seminarledernes prøveeksamen, ikke en offisiell eksamensoppgave.
+:::
+
+
+## Slik jobber vi
+
+- Oppgavene står i studentenes prøveeksamensnotatblokk.
+- Svar først selv; vi viser løsningene underveis.
+- Øv på å skrive kode **uten å kjøre den**, som i WISEflow.
+- Fokus: forstå fremgangsmåten og sikre poeng på grunnleggende oppgaver.
+
+
+## Del 1: Flervalg (10 × 3 poeng = 30 poeng)
+
+**Velg ett alternativ per spørsmål.**
+
+Velg ett svar per spørsmål. Vi tar ca. 5 minutter per spørsmål, inkludert gjennomgang.
+
+
+## Spm 1: Hvordan importerer du SymPy og definerer symbolet x? (3 poeng)
+
+**A)** `import sympy as sp; x = sp.symbols('x')`
+
+**B)** `from sympy import symbols; x = symbols(x)`
+
+**C)** `import sympy as sp; x = sp.symbol('x')`
+
+**D)** Både B og C
+
+::: {.fragment}
+**Riktig svar: A.** `sp.symbols` tar variabelnavnet som en streng.
+:::
+
+
+::: notes
+Spm 1 i studentnotatblokken. Ca. 5 minutter: la studentene velge før du viser riktig svar.
+:::
+
+
+## Spm 2: Hva gjør `df.dropna()` i pandas? (3 poeng)
+
+**A)** Fjerner rader som inneholder minst én manglende verdi som standard
+
+**B)** Erstatter manglende verdier med 0
+
+**C)** Teller antall manglende verdier
+
+**D)** Endrer ingenting i DataFrame-en
+
+::: {.fragment}
+**Riktig svar: A.** Standardinnstillingen er `axis=0` og `how="any"`.
+:::
+
+
+::: notes
+Spm 2 i studentnotatblokken. Ca. 5 minutter: la studentene velge før du viser riktig svar.
+:::
+
+
+## Spm 3: Hvordan finner du den deriverte av $x^2$ med SymPy? (3 poeng)
+
+**A)** `sp.diff(x**2, x)`
+
+**B)** `sp.diff(x**2)` gir `x`
+
+**C)** `sp.derive(x**2, x)`
+
+**D)** `sp.integrate(x**2, x)`
+
+::: {.fragment}
+**Riktig svar: A.** Svaret blir $2x$.
+:::
+
+
+::: notes
+Spm 3 i studentnotatblokken. Ca. 5 minutter: la studentene velge før du viser riktig svar.
+:::
+
+
+## Spm 4: Hvilken SymPy-funksjon løser en likning? (3 poeng)
+
+**A)** `sp.integrate(...)`
+
+**B)** `sp.diff(...)`
+
+**C)** `sp.plot(...)`
+
+**D)** `sp.solve(...)`
+
+::: {.fragment}
+**Riktig svar: D.** `sp.solve` finner verdier som oppfyller likningen.
+:::
+
+
+::: notes
+Spm 4 i studentnotatblokken. Ca. 5 minutter: la studentene velge før du viser riktig svar.
+:::
+
+
+## Spm 5: Hvordan lager du en pandas Series fra listen `lst`? (3 poeng)
+
+**A)** `pd.Series(lst)`
+
+**B)** `pd.DataFrame(lst)`
+
+**C)** `np.array(lst)`
+
+**D)** `list(lst)`
+
+::: {.fragment}
+**Riktig svar: A.** En Series er endimensjonal.
+:::
+
+
+::: notes
+Spm 5 i studentnotatblokken. Ca. 5 minutter: la studentene velge før du viser riktig svar.
+:::
+
+
+## Spm 6: Hvilken linje lager en tom liste i Python? (3 poeng)
+
+**A)** `lst = {}`
+
+**B)** `lst = []`
+
+**C)** `lst = ()`
+
+**D)** `lst = ''`
+
+::: {.fragment}
+**Riktig svar: B.** `[]` lager en liste; de andre gir dict, tuple og streng.
+:::
+
+
+::: notes
+Spm 6 i studentnotatblokken. Ca. 5 minutter: la studentene velge før du viser riktig svar.
+:::
+
+
+## Spm 7: Hvordan leser du inn en CSV-fil med pandas? (3 poeng)
+
+**A)** `pd.read_csv('fil.csv')`
+
+**B)** `pd.open('fil.csv')`
+
+**C)** `pd.load('fil.csv')`
+
+**D)** `np.read('fil.csv')`
+
+::: {.fragment}
+**Riktig svar: A.** Forutsetter at pandas er importert som `pd`.
+:::
+
+
+::: notes
+Spm 7 i studentnotatblokken. Ca. 5 minutter: la studentene velge før du viser riktig svar.
+:::
+
+
+## Spm 8: Hvordan velger du kolonnen `A` fra DataFrame `df`? (3 poeng)
+
+**A)** `df.A`
+
+**B)** `df['A']`
+
+**C)** Både A og B
+
+**D)** Ingen av dem
+
+::: {.fragment}
+**Riktig svar: C.** Begge fungerer når kolonnen heter `A`; hakeparenteser fungerer også for mange kolonnenavn som ikke egner seg med punktnotasjon.
+:::
+
+
+::: notes
+Spm 8 i studentnotatblokken. Ca. 5 minutter: la studentene velge før du viser riktig svar.
+:::
+
+
+## Spm 9: Hva gjør `df.describe()`? (3 poeng)
+
+**A)** Fjerner NaN-verdier
+
+**B)** Sorterer radene
+
+**C)** Viser oppsummerende statistikk for numeriske kolonner, som gjennomsnitt og standardavvik
+
+**D)** Gjør alle verdiene om til null
+
+::: {.fragment}
+**Riktig svar: C.** Som standard oppsummeres numeriske kolonner.
+:::
+
+
+::: notes
+Spm 9 i studentnotatblokken. Ca. 5 minutter: la studentene velge før du viser riktig svar.
+:::
+
+
+## Spm 10: Hva er resultatet av `7 // 3` i Python? (3 poeng)
+
+**A)** `2`
+
+**B)** `2.3333333333`
+
+**C)** `1`
+
+**D)** `3`
+
+::: {.fragment}
+**Riktig svar: A.** `//` er heltallsdivisjon (gulvdivisjon), og 7 delt på 3 rundes ned til 2.
+:::
+
+
+::: notes
+Spm 10 i studentnotatblokken. Ca. 5 minutter: la studentene velge før du viser riktig svar.
+:::
+
+
+## Pause - 15 minutter
+
+**Fortsetter med kortsvar etter pausen.**
+
+
+## Del 2: Kortsvar (8 × 5 poeng = 40 poeng)
+
+**Svar kort og presist. Der det bes om kode, holder det å skrive koden.**
+
+Skriv korte svar eller enkle kodeuttrykk. Vi tar én oppgave og én løsning om gangen.
+
+
+## Oppgave 2.1: Dataframe (5 poeng) – oppgave
+
+Forklar kort hva en DataFrame er i pandas, og nevn to vanlige operasjoner.
+
+```python
+import pandas as pd
+
+data = {'A': [-1, 0, 2, 5], 'B': [10, 20, 30, 40]}
+df = pd.DataFrame(data)
+```
+
+
+::: notes
+Oppgave 2.1 i studentnotatblokken. Ca. 10 minutter totalt til arbeid og felles gjennomgang. La studentene prøve først.
+:::
+
+
+## Oppgave 2.1: Dataframe – Løsningsforslag
+
+En DataFrame er en todimensjonal tabell med rader og kolonner. Eksempler: velge/filtrere rader og kolonner, legge til kolonner eller beregne gjennomsnitt.
+
+
+## Oppgave 2.2: Filtrering i pandas (5 poeng) – oppgave
+
+Med `df` fra K1: Hvilke rader får vi fra uttrykket `df[df["A"] > 0]`? Skriv verdiene i kolonnene A og B.
+
+```python
+df = pd.DataFrame({
+    'A': [-1, 0, 2, 5],
+    'B': [10, 20, 30, 40]
+})
+df[df['A'] > 0]
+```
+
+
+::: notes
+Oppgave 2.2 i studentnotatblokken. Ca. 10 minutter totalt til arbeid og felles gjennomgang. La studentene prøve først.
+:::
+
+
+## Oppgave 2.2: Filtrering i pandas – Løsningsforslag
+
+Bare radene der A er større enn 0: `(A=2, B=30)` og `(A=5, B=40)`. Verdiene `-1` og `0` er ikke større enn 0.
+
+
+## Oppgave 2.3: Gruppering i pandas (5 poeng) – oppgave
+
+Hva blir resultatet av `df.groupby("Produkt")["Antall"].sum()`? Oppgi summen for Eple og Banan.
+
+```python
+df = pd.DataFrame({
+    'Produkt': ['Eple', 'Banan', 'Eple'],
+    'Antall': [5, 40, 15]
+})
+```
+
+
+::: notes
+Oppgave 2.3 i studentnotatblokken. Ca. 12 minutter totalt til arbeid og felles gjennomgang. La studentene prøve først.
+:::
+
+
+## Oppgave 2.3: Gruppering i pandas – Løsningsforslag
+
+Eple: `5 + 15 = 20`. Banan: `40`. `groupby` grupperer like produktnavn, og `sum` summerer antall per gruppe.
+
+
+## Oppgave 2.4: Lister, for-løkke og if (5 poeng) – oppgave
+
+Hvor mange måneder ligger utgiftene **over** 10 000 kr? Regn ut svaret uten å kjøre kode. Teller en måned med nøyaktig 10 000 kr med?
+
+```python
+utgifter = [12000, 8500, 10000, 13000, 7500, 11000]
+antall = 0
+for utgift in utgifter:
+    if utgift > 10000:
+        antall += 1
+print(antall)
+```
+
+
+::: notes
+Oppgave 2.4 i studentnotatblokken. Ca. 10 minutter totalt til arbeid og felles gjennomgang. La studentene prøve først.
+:::
+
+
+## Oppgave 2.4: Lister, for-løkke og if – Løsningsforslag
+
+Koden skriver ut **3**. Utgiftene 12 000, 13 000 og 11 000 er over grensen. 10 000 er ikke over 10 000 (`>` er streng ulikhet).
+
+
+## Oppgave 2.5: if/else og rabatt (5 poeng) – oppgave
+
+En butikk gir 10 % rabatt ved kjøp for **mer enn** 1 000 kr. Hva blir `ny_pris` når `totalpris = 1500`? Hva skjer hvis `totalpris = 1000`?
+
+```python
+totalpris = 1500
+if totalpris > 1000:
+    ny_pris = totalpris * 0.90
+else:
+    ny_pris = totalpris
+```
+
+
+::: notes
+Oppgave 2.5 i studentnotatblokken. Ca. 10 minutter totalt til arbeid og felles gjennomgang. La studentene prøve først.
+:::
+
+
+## Oppgave 2.5: if/else og rabatt – Løsningsforslag
+
+Når prisen er 1 500 kr, blir `ny_pris = 1350`. Ved nøyaktig 1 000 kr gis **ingen** rabatt, fordi betingelsen er `> 1000` og ikke `>= 1000`.
+
+
+## Oppgave 2.6: Derivasjon med SymPy (5 poeng) – oppgave
+
+Bruk SymPy til å derivere funksjonen og finne x-verdiene der den deriverte er lik null. Skriv koden; du trenger ikke regne ut for hånd.
+
+$$f(x) = x^3 - 6x^2 + 9x + 15$$
+
+
+::: notes
+Oppgave 2.6 i studentnotatblokken. Ca. 16 minutter totalt til arbeid og felles gjennomgang. La studentene prøve først.
+:::
+
+
+## Oppgave 2.6: Derivasjon med SymPy – Løsningsforslag
+
+Vi bruker `sp.diff` til å derivere og `sp.solve` til å sette den deriverte lik null. Løsningene er $x=1$ og $x=3$.
+
+```python
+import sympy as sp
+x = sp.symbols('x')
+f = x**3 - 6*x**2 + 9*x + 15
+derivert = sp.diff(f, x)
+kritiske_x = sp.solve(sp.Eq(derivert, 0), x)
+# kritiske_x blir [1, 3]
+```
+
+
+## Oppgave 2.7: Expand og factor (5 poeng) – oppgave
+
+Skriv SymPy-kode som (a) utvider $(x+y)^2$ og (b) faktoriserer $x^2+2xy+y^2$.
+
+
+::: notes
+Oppgave 2.7 i studentnotatblokken. Ca. 12 minutter totalt til arbeid og felles gjennomgang. La studentene prøve først.
+:::
+
+
+## Oppgave 2.7: Expand og factor – Løsningsforslag
+
+`sp.expand` utvider parentesen, mens `sp.factor` går andre veien.
+
+```python
+import sympy as sp
+x, y = sp.symbols('x y')
+sp.expand((x + y)**2)        # x**2 + 2*x*y + y**2
+sp.factor(x**2 + 2*x*y + y**2)  # (x + y)**2
+```
+
+
+## Oppgave 2.8: while-løkke og sparing (5 poeng) – oppgave
+
+Hva skriver koden ut, og hva betyr variabelen `måneder`? Forklar kort når løkken stopper.
+
+```python
+saldo = 0
+måneder = 0
+while saldo < 2700:
+    saldo += 900
+    måneder += 1
+print(måneder)
+```
+
+
+::: notes
+Oppgave 2.8 i studentnotatblokken. Ca. 15 minutter totalt til arbeid og felles gjennomgang. La studentene prøve først.
+:::
+
+
+## Oppgave 2.8: while-løkke og sparing – Løsningsforslag
+
+Koden skriver ut **3**. `måneder` teller antall innskudd. Etter tre runder er saldo 2 700 kr, og betingelsen `saldo < 2700` er ikke lenger oppfylt.
+
+
+## Del 3: Programmering (3 × 10 poeng = 30 poeng)
+
+**Skriv kode som kan fungere uten at du har mulighet til å testkjøre den.**
+
+- Skriv kode uten å testkjøre den.
+- Del opp problemet: data → operasjon → svar.
+- Vi går gjennom en enkel løsning trinn for trinn.
+
+
+## Oppgave 3.1: Pandas og produkter (10 poeng) – oppgave
+
+Opprett en DataFrame fra disse dataene:
+
+- `Egenskap`: Eple, Banan, Vannmelon
+- `Antall`: 5, 40, 20
+- `Lagerplass`: 100, 100, 50
+- `Pris`: 10, 5, 15
+
+**a)** Lag DataFrame-en `df`. (3 poeng)
+
+**b)** Legg til kolonnen `Pris per lagerenhet = Pris / Lagerplass`. (3 poeng)
+
+**c)** Velg bare radene med pris på minst 10 kr. (2 poeng)
+
+**d)** Finn gjennomsnittet av kolonnen `Antall`. (2 poeng)
+
+
+::: notes
+Oppgave 3.1 i studentnotatblokken. Ca. 22 minutter totalt. La studentene skrive kode først, vis deretter delene én etter én. Vi bruker fruktoppgaven fra fagdagen, i en kortere variant.
+:::
+
+
+## Oppgave 3.1: Pandas og produkter – a) Lag tabellen
+
+```python
+import pandas as pd
+
+data = {
+    'Egenskap': ['Eple', 'Banan', 'Vannmelon'],
+    'Antall': [5, 40, 20],
+    'Lagerplass': [100, 100, 50],
+    'Pris': [10, 5, 15]
+}
+df = pd.DataFrame(data)
+```
+
+
+## Oppgave 3.1: Pandas og produkter – b) Ny kolonne
+
+```python
+df['Pris per lagerenhet'] = (
+    df['Pris'] / df['Lagerplass']
+)
+# Eple: 0.10, Banan: 0.05, Vannmelon: 0.30
+```
+
+
+## Oppgave 3.1: Pandas og produkter – c–d) Filtrering og gjennomsnitt
+
+```python
+dyre_produkter = df[df['Pris'] >= 10]
+gjennomsnitt = df['Antall'].mean()
+# Eple og Vannmelon
+# gjennomsnitt: (5 + 40 + 20) / 3 = 21.67
+```
+
+
+## Oppgave 3.2: Budsjettkontroll med funksjon (10 poeng) – oppgave
+
+Vi har listen:
+
+```python
+utgifter = [12000, 8500, 10000, 13000, 7500, 11000]
+```
+
+**a)** Lag en funksjon `antall_over_budsjett(utgifter, grense)` med to parametere. (3 poeng)
+
+**b)** Bruk `for` og `if` til å telle utgifter som er **større enn** `grense`. Returner antallet. (5 poeng)
+
+**c)** Kall funksjonen med grense 10 000 og lagre svaret. (2 poeng)
+
+
+::: notes
+Oppgave 3.2 i studentnotatblokken. Ca. 23 minutter totalt. La studentene skrive kode først, vis deretter delene én etter én. Bygger på oppgaven med for-løkke og if fra Seminar 12.
+:::
+
+
+## Oppgave 3.2: Budsjettkontroll med funksjon – a–b) Funksjon, løkke og betingelse
+
+```python
+def antall_over_budsjett(utgifter, grense):
+    antall = 0
+    for utgift in utgifter:
+        if utgift > grense:
+            antall += 1
+    return antall
+```
+
+
+## Oppgave 3.2: Budsjettkontroll med funksjon – c) Funksjonskall
+
+```python
+utgifter = [12000, 8500, 10000,
+            13000, 7500, 11000]
+svar = antall_over_budsjett(utgifter, 10000)
+# svar = 3
+```
+
+
+## Oppgave 3.3: Tilbud og etterspørsel i SymPy (10 poeng) – oppgave
+
+Et marked har etterspørsel og tilbud
+
+$$Q_e = 200 - 4p, \qquad Q_t = 10 + 6p$$
+
+**a)** Definer `p`, `qe` og `qt` i SymPy. (2 poeng)
+
+**b)** Bruk `sp.solve` til å finne likevektsprisen og `subs` til å finne likevektsmengden. (5 poeng)
+
+**c)** Lag en funksjon `finn_likevekt(qe, qt, p)` som returnerer `(pris, mengde)` for dette eller et annet slikt marked. (3 poeng)
+
+
+::: notes
+Oppgave 3.3 i studentnotatblokken. Ca. 25 minutter totalt. La studentene skrive kode først, vis deretter delene én etter én. Samme markedscase som i den opprinnelige prøveeksamen.
+:::
+
+
+## Oppgave 3.3: Tilbud og etterspørsel i SymPy – a) Definer markedet
+
+```python
+import sympy as sp
+p = sp.symbols('p')
+qe = 200 - 4*p
+qt = 10 + 6*p
+```
+
+
+## Oppgave 3.3: Tilbud og etterspørsel i SymPy – b) Finn likevekten
+
+```python
+pris = sp.solve(sp.Eq(qe, qt), p)[0]
+mengde = qe.subs(p, pris)
+# pris = 19
+# mengde = 124
+```
+
+
+## Oppgave 3.3: Tilbud og etterspørsel i SymPy – c) Lag en generell funksjon
+
+```python
+def finn_likevekt(qe, qt, p):
+    pris = sp.solve(sp.Eq(qe, qt), p)[0]
+    mengde = qe.subs(p, pris)
+    return pris, mengde
+
+finn_likevekt(qe, qt, p)  # (19, 124)
+```
+
+
+## Oppsummering og spørsmål
+
+- Flervalg: les kode og kjenn igjen funksjoner.
+- Kortsvar: forklar kort hva koden gjør.
+- Programmering: skriv kode med riktig syntaks, innrykk og rekkefølge.
+
+**Hva vil dere øve mer på før eksamen?**
+
+
+::: notes
+Sett av ca. 10 minutter til spørsmål og til å repetere én oppgave studentene syntes var vanskelig.
+:::
