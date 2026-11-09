@@ -1,0 +1,971 @@
+---
+title: "Bed-1304 Python lab"
+subtitle: "Seminar 12 - Eksamensforberedelse"
+date: last-modified
+date-format: "DD-MM-YYYY"
+echo: true
+warning: false
+format: 
+  revealjs:
+    auto-stretch: false
+    theme: moon
+    smaller: true
+---
+
+# Fagdag oppsett
+
+**Gjennomgang:** 
+
+Vi går gjennom litt av hvert fra alle tidligere seminarer 
+
+- Funksjoner
+- Lister
+- Pandas
+- Logikk og løkker
+- Sympy
+
+Vi tenker at det er i hovedsak disse temaene som blir viktigst å repetere til eksamen.
+
+::: notes
+Resten av pakkene er ikke like viktige, ettersom de er vanskelig å teste på selve eksamen. Seaborn er ikke pensum.
+
+:::
+
+
+# Fagdag oppsett
+
+Last ned jupyter notebook filen fra github repoet vårt her [https://github.com/DanielFabioG/data/](https://github.com/DanielFabioG/data).
+
+**Inne på github kan dere søke "DanielFabioG" og trykke på User på venstresiden. Så finner dere "Repositories" og trykk på Data. Last så ned "Seminar oppgaver.ipynb"**
+
+- Kodeblokkene er i RAW-format, dvs. vi kjører ikke koden.
+- Deaktiver CoPilot
+- Det gjøres under extensions -> GitHub Copilot -> Disable
+- Restart VS code etterpå, for å være sikker på at det ikke er aktivt.
+
+# Fagdag oppsett
+
+- Repitisjon av tidligere seminarer
+- Oppgaver
+- Felles gjennomgang
+- Finn ut hvor dere trenger mer øving
+- Mer repitisjonsoppgaver for de som trenger
+- Hjelp og spørsmål
+
+Spørsmål nå før vi begynner?
+
+::: notes
+Vi starter med gjennomgang av litt pandas. en funksjon, en sympy. så lar vi studentene gå løs på oppgaver. i raw format. ingen kodekjøring. 
+Vi setter av ca 40min til at de løser alle de oppgavene. minieksamen.
+
+Oppgavene blir gitt ut i et notepad slik at studentene finner hvor de sliter i tide før eksamen. 
+Så kan vi bruke siste 2t på å gjennomgå oppgavene i fellesskap.
+
+Time 2 er gjennomgang av de oppgavene og sjekk av sin kode for å se ka som gikk bra/dårlig. 
+Dette er for å hjelpe alle finne ut hvor de selv må jobbe for eksamen.
+
+Er kort tid til eksamen så bruk dagene nå og helgen så vil det gå bra. 
+
+Time 3 er mer repitisjonsoppgaver fra markus. og time 4 generelle spørsmål og hjelp. 
+
+time 2-4 er vi ganske fleksible men første timen så bør de få jobbet
+:::
+
+
+## Gjennomgang Pandas
+
+```{python}
+import pandas as pd
+
+data = {'Seminar': ["Sympy", "Pandas"],
+'Oppmøte': [35, 25],}
+
+df = pd.DataFrame(data)
+
+df
+```
+
+
+## Vi hørte hva folk syntes om seminarene og en score til hver
+
+```{python}
+df['Score'] = [60, 95]
+df
+```
+
+
+## Vi lurte på hvor mye vår forberedelse hadde å si 
+
+
+```{python}
+df['Forbredelse i timer'] = [3, 4]
+df
+```
+
+## Hvor mye score per time forberedelse?
+
+```{python}
+df['Score per time'] = df['Score'] / df['Forbredelse i timer']
+df
+```
+
+## Legger til en ny linje med nytt seminar
+```{python}
+df.loc[len(df)] = ['Matplotlib', 30, 85, 1, 85/1] 
+df # len = 2, så df.loc[2] = har ingen rad fra før så lages nå
+```
+
+## Hvilket seminar var best?
+```{python}
+df.sort_values(by='Score', ascending=True) #arange etter score per time
+df
+```
+
+```{python}
+df.loc[df['Score'].idxmax()]
+```
+
+
+
+## Gjennomgang sympy
+
+Løs ligningene for p
+
+$$
+D(p) = 100 - 2p, \quad S(p) = 3p - 20
+$$
+
+
+```{python}
+import sympy as sp
+p = sp.symbols('p')
+ettersporsel = 100 - 2*p
+tilbud = 3*p - 20
+
+likevekt = sp.solve(ettersporsel - tilbud, p)
+print(f"Likevektspris: {likevekt[0]}")
+```
+
+
+
+
+
+
+
+
+
+
+## Da kan dere prøve dere på oppgavene selv!
+
+- Gjør det dere klarer/husker
+- Prøv å gjøre alt "selv"
+- Vi går gjennom alt sammen etterpå
+
+
+## Pandas oppgaven start av gjennomgang del 1. 
+
+
+### Forklar kort hva en DataFrame er i pandas og nevn to vanlige operasjoner man gjør på en DataFrame
+
+
+```{python}
+import pandas as pd
+
+data = {'A': [-1, 0, 2, 5],
+'B': [10, 20, 30, 40]}
+
+df = pd.DataFrame(data)
+
+df
+```
+
+
+
+## Løsningsforslag
+
+En DataFrame er en todimensjonal datastruktur i pandas med rader og kolonner, lik et regneark. Vanlige operasjoner inkluderer:
+
+- Filtrering: df[df[’A’] > 0] - gjør at vi får en ny dataframe som inneholder kun rader hvor A > 0.
+
+```{python}
+df[df['A'] > 0]
+```
+
+::: notes
+Hva skjer:
+
+- Vi bruker betingelsen df[’A’] > 0 for å lage en boolsk maske som velger rader der kolonnen A har verdier større enn 0.
+- Vi bruker denne masken til å indeksere DataFrame df, noe som gir oss en ny DataFrame med bare de radene som oppfyller betingelsen.
+- Resultatet er en DataFrame som inneholder kun radene hvor kolonnen A har verdier større enn 0.
+:::
+
+## Løsningsforslag
+
+```{python}
+
+df.groupby('A').mean()
+
+```
+
+::: notes
+Hva skjer:
+
+- Vi bruker groupby-metoden på DataFrame df for å gruppere radene basert på unike verdier i kolonnen A.
+- Deretter bruker vi mean()-metoden for å beregne gjennomsnittet av hver gruppe for de andre kolonnene i DataFrame.
+- Resultatet er en ny DataFrame der hver rad representerer en unik verdi fra kolonnen A, og kolonnene inneholder gjennomsnittsverdiene for de tilhørende gruppene.
+:::
+
+## Oppgave 1
+
+
+### Lag datasettet og finn hvilke personer som er under 30 år gamle.
+
+
+### Legg til en ny kolonne hvor vi ser hvor mye hver person vokser per år basert på høyde og alder.
+
+
+
+## Gjennomgang 
+
+Datasettet skal være navnet på personen, høyden i cm og alderen i år for Per, Pål og Ola. 
+Per er 30 år gammel og 180 cm høy, Pål er 25 år gammel og 175 cm høy, Ola er 35 år gammel og 170 cm høy.
+
+
+
+
+```{python}
+personer = {
+    "Navn": ["Per", "Pål", "Ola"],
+    "Høyde": [180, 175, 170],
+    "Alder": [30, 25, 35]
+}
+personer_df = pd.DataFrame(personer)
+aldre_under_30 = personer_df[personer_df["Alder"] < 30]
+print(aldre_under_30)
+```
+
+
+
+
+## Legge til en Ny Kolonne
+Legg til en ny kolonne hvor vi ser hvor mye hver person vokser per år basert på høyde og alder.
+
+
+```{python}
+personer_df["Vekst per år"] = personer_df["Høyde"] / personer_df["Alder"]
+print(personer_df)
+```
+
+## Gjennomgang df med forskjellige produkter:
+
+
+
+**Kolonner**: "Egenskap", "Antall", "Lagerplass"
+
+**Data**:
+
+* "Eple", 5 , 100 
+* "Banan", 40 , 100
+
+Skriv ut hele DataFrame-en.
+
+
+```{python}
+import pandas as pd
+
+data = {'Egenskap': ["Eple", "Banan"],
+'Antall': [5, 40],
+'Lagerplass': [100, 100],}
+
+df = pd.DataFrame(data)
+df
+```
+
+
+
+## Legg til en ny rad for produktet "Vannmelon" med antall 20 og lagerplass 50.
+
+```{python}
+
+df.loc[len(df)] = ["Vannmelon", 20, 50] #Ved å sette len(df) så får vi den totale lengden på datasettet. python indeks starter på 0 så vi får en ny rad på slutten. 
+df
+```
+
+## Legg til en ny kolonne for pris per enhet for hvert produkt. 
+Fyll inn prisene som følger: Eple - 10 kr, Banan - 5 kr, Vannmelon - 15 kr.
+
+```{python}
+
+df['Pris'] = [10, 5, 15]
+df
+```
+
+## Legg til en ny rad for et produkt "Appelsin" med antall 50, lagerplass 80 og pris per enhet 10 kr
+
+```{python}
+
+df.loc[len(df)] = ["Appelsin", 30, 80, 10] #Ved å sette len(df) så får vi den totale lengden på datasettet. python indeks starter på 0 så vi får en ny rad på slutten. 
+df
+```
+
+## Lag en ny kolonne hvor du regner ut hvor mye plass hver frukt tar av lagerplassen sin. 
+
+```{python}
+df["Andel av lagerplass brukt"] = (df["Antall"]) / df["Lagerplass"] 
+df
+
+```
+
+
+## Finn gjennomsnittsantallet av alle produktene i DataFrame-en.
+
+```{python}
+
+df["Antall"].mean()
+
+```
+
+
+
+## Sympy oppgaven Del 1
+
+## Bruk sympy til å derivere funksjonene: $f, g, \beta$ nedenfor.
+
+Tips sp.diff, sp.solve. sp.symbols
+
+
+$$ 
+f(x) = x^2 - 6x^2 + 9x + 15 
+$$
+
+$$
+g(x) = 2x^3 - 4x^2 + 3x - 5
+$$
+
+$$
+\beta(x) = \frac{1}{x^2 + 1}
+$$
+
+Skriv de nødvendige uttrykkene.
+
+## Sympy oppgaven Del 1 løsning
+
+```{python}
+import sympy as sp
+x = sp.symbols ('x')
+f = x **2 - 6* x **2 + 9* x + 15
+derivert_f = sp.diff(f, x)
+derivert_f
+```
+
+
+
+### For hvilke x verdier er $f'(x) = 0$? 
+
+```{python}
+lost_for_null = sp.Eq(derivert_f, 0)
+sp.solve(lost_for_null, x)
+
+```
+
+
+## Funksjon g løsning
+
+
+
+```{python}
+g = 2*x**3 - 4*x**2 + 3*x - 5
+derivert_g = sp.diff(g, x)
+derivert_g
+
+```
+
+
+### Funksjon $\beta$ løsning
+
+```{python}
+beta = 1 / (x**2 + 1)
+derivert_beta = sp.diff(beta, x)
+derivert_beta
+```
+
+
+## Pandasoppgaven Del 2 Logikk og funksjoner
+
+
+
+
+### Anbefalt ekstraoppgave: Beregn Totalt Sparebeløp
+En person setter inn $1000$ kr på en sparekonto hver måned. Banken gir $2$% årlig rente, men renten legges ikke til før på slutten av året.
+
+Skriv en `for`-løkke som simulerer 5 år med sparing og beregner hvor mye penger personen har etter denne perioden.
+
+### Legg til i en ny blokk for de som vil. 
+
+
+
+
+## Eksempel lån med For-løkke
+En person tar opp et lån på $10,000$ kr med en årlig rente på $5$%.
+
+Skriv en for-løkke som viser hvor mye lånet vokser hvert år i 5 år.
+
+
+```{python}
+lån = 10000 # Startverdier
+rente = 0.05 # Løkke for å beregne lån over 5 år
+for år in range(1, 6):
+    lån *= (1 + rente)
+    print(f"År {år}: {lån:.2f} kr")
+```
+
+
+
+
+
+
+## Automatisk påfyll av varer
+
+Lag en funksjon som øker antallet av varen med 10 hvis lagerbeholdningen av en vare er under 10%, frem til den når over 50%. 
+
+## Identifiser varer med lav beholdning
+
+```{python}
+lav_beholdning = df[df["Andel av lagerplass brukt"] < 0.1]
+lav_beholdning
+```
+
+::: notes
+
+Først, la oss se hvilke varer som har en andel av lagerplass brukt under 10% (0.1). Dette er varene som trenger påfyll.
+
+::: 
+
+
+## Lag en funksjon for å fylle på lageret med en while-løkke
+
+
+```{python}
+def fyll_paa_til_halvfullt(dataframe):
+    df_kopi = dataframe.copy() #bare god praksis å kopiere dataframes i funksjoner for å unngå uventede endringer i originaldataene.
+    
+    # Finn indekser for rader hvor andelen er under 0.1
+    lav_beholdning_indeks = df_kopi[df_kopi["Andel av lagerplass brukt"] < 0.1].index
+    
+    # Gå gjennom hver vare som trenger påfyll
+    for indeks in lav_beholdning_indeks:
+        print(f"Fyller på {df_kopi.loc[indeks, 'Egenskap']}...")
+        # While-løkke som kjører til andelen er over 0.5
+        while df_kopi.loc[indeks, "Andel av lagerplass brukt"] < 0.5:
+            df_kopi.loc[indeks, 'Antall'] += 10
+            # Oppdater andelen for å sjekke betingelsen i neste iterasjon
+            df_kopi["Andel av lagerplass brukt"] = df_kopi["Antall"] / df_kopi["Lagerplass"]
+            print(f"  Nytt antall: {df_kopi.loc[indeks, 'Antall']}, Ny andel: {df_kopi.loc[indeks, 'Andel av lagerplass brukt']:.2f}")
+            
+    return df_kopi
+
+df_oppdatert = fyll_paa_til_halvfullt(df)
+df_oppdatert
+# Denne kan håppes over om den føles for vanskelig
+```
+
+::: notes
+Nå lager vi en funksjon som itererer gjennom varene med lav beholdning. For hver av disse varene bruker vi en `while`-løkke for å øke antallet med 10 helt til andelen av lagerplass brukt er over 50% (0.5).
+
+La oss kalle funksjonen og se hvordan DataFrame-en endrer seg. Legg merke til hvordan "Eple" fylles på i flere omganger.
+
+::: 
+
+
+
+
+## Finn mest lønnsomme produkt
+
+For å finne ut hvilket produkt som gir høyest pris i forhold til plassen det tar, kan vi lage en ny kolonne `Pris per lagerenhet`.
+Pris per lagerenhet = Pris / Lagerplass
+
+```{python}
+df['Pris_per_lagerenhet'] = df['Pris'] / df['Lagerplass']
+df['Pris_per_lagerenhet'].idxmax()
+```
+
+
+
+
+
+
+
+## Ekstraoppgave LF
+```{python}
+månedlig_sparing = 1000 # Startverdier
+rente = 0.02  # 2% årlig rente
+år = 5        # 5 år med sparing
+saldo = 0     # Starter med 0 kronasjer
+
+# Løkke for å beregne saldo over flere år
+for i in range(1, år + 1):
+    saldo += månedlig_sparing * 12          # Legg til sparing for året
+    saldo *= (1 + rente)                    # Legg til årlig rente, på slutten av året.
+    print(f"Etter {i} år: {saldo:.2f} kr")  # Print resultatet, med avrundede verdier
+print(f"Totalt etter {år} år: {saldo:.2f} kr")  # Print totalen etter alle årene
+```
+
+
+
+
+
+
+
+
+
+
+
+
+## Sympy oppgaven Del 2 
+
+
+
+
+
+## Finn den deriverte og hvor den er lik 0
+
+Vi definerer to funksjoner:
+
+$$ f(x) = x^2 - 3x^2 + 3x + 10 \quad \quad \text{og} \quad \quad g(x) = x^2 +1$$
+
+og vi ønsker å finne den deriverte i funksjonene.
+
+```{python}
+import sympy as sp
+x = sp.symbols('x') #definerer symbol
+# definerer funksjoner
+f = x **2 - 3* x **2 + 3* x + 10
+g = x ** 2 + 1
+
+losning_x = sp.diff(f, x)
+losning_g = sp.diff(g, x)
+display(losning_x)
+display(losning_g)
+```
+
+## Finn den deriverte og hvor den er lik 0
+
+Finner hvor den deriverte er lik null og løse ligningen med sp.solve() for å finne x-verdi(ene).
+
+```{python}
+lost_for_null = sp.Eq(losning_x, 0)
+losning_toppunkter = sp.solve(lost_for_null, x)
+
+print(losning_toppunkter)
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## Ekspandere uttrykk. `sp.expand` til å utvide uttrykket $(x+y)^2$ til $x^2 + 2xy + y^2$
+
+```{python}
+x, y, z = sp.symbols('x y z') #Definerer symboler
+expr = (x+y)**2 # Skriver uttrykket vårt
+new_expr = sp.expand(expr) # Utvider uttrykket
+new_expr
+```
+
+### Faktorisere uttrykket $x^2 + 2xy + y^2$
+
+
+```{.python}
+org_expr = sp.factor(new_expr)
+org_expr
+```
+
+
+## Sympy Cobb-Douglas
+$$f(K, L) = A \cdot K^{\alpha} \cdot L^{\beta}$$
+
+
+
+lag en funksjon som definerer Cobb-Douglas funksjonen, hvor vi setter $A=1$, $\alpha = 0.2$ og $\beta = 1-\alpha$.
+
+
+## LF
+
+```{python}
+A = 1
+alpha, beta = 0.2, 0.8
+def cobb_douglas(K, L, A, alpha, beta):
+    return A * (K ** alpha) * (L ** beta)
+```
+
+
+### Finn den partiell deriverte av Cobb-Douglas funksjonen (mhp $K$). 
+
+
+## Oppgave  LF
+
+```{python}
+#Definer symboler for kapital (K), arbeidskraft (L), og konstanter A, alpha, beta
+A, alpha, beta, K, L = sp.symbols('A alpha beta K L')
+
+#Finn partielle deriverte med hensyn til kapital (K)
+dY_dK = sp.diff(cobb_douglas(K, L, A, alpha, beta), K)
+dY_dK
+```
+
+## Vi ser på et enkelt tilbuds- og etterspørselmarked:
+
+
+
+$$Q_e = 200 - 4p, \; \; \; \; \; \;  Q_t = 10 + 6p,$$
+
+hvor $Q_e$ er etterspørselen og $Q_t$ er tilbud og $p$ er prisen.
+
+1. Bruk SymPy til å finne likevektsprisen og -mengden.
+
+2. Lag en funksjon som generaliserer: gitt en etterspørselfunksjon og en tilbudsfunksjon, finn likevekten.
+
+## Sympy-case løsningsforslag
+
+Definer symboler, lag funksjoner for tilbud og etterspørsel.
+
+Løs likningene for prisen.
+
+```{python}
+import sympy as sp
+# Definerer symboler
+qe, qt,p = sp.symbols('q_e q_t p')
+
+# Definerer tilbud og etterspørsel
+qe = 200 - 4 *p
+qt = 10 + 6*p
+
+likevekt_pris = sp.solve(sp.Eq(qe,qt),p)[0]
+
+likevekt_pris
+```
+
+## Sympy-case løsningsforslag forts
+
+For å finne likevektskvantum vet vi har prisen nå er.
+
+Når vi har at $p$ = 19, trenger vi bare å substituere dette inn i etterspørselen:
+
+$$Q_e = 200 - 4 * p \rightarrow 200 - 4 * 19 = 124$$
+
+og i python kan man da bare bruke funksjonen .subs:
+
+```{python}
+# Finner likevektskvantum
+likevekts_kvantum = qe.subs(p, likevekt_pris)
+
+likevekts_kvantum
+```
+
+## Sympy-case løsningsforslag forts
+
+Vi trenger ikke definere variablene på nytt siden vi har allerede laget dem tidligere.
+
+
+```{python}
+# Vi trenger ikke dette men kanskje lurt å gjøre til eksamen
+#qe, qt,p = sp.symbols('q_e q_t p')
+
+# Definerer tilbud og etterspørsel
+#qe = 200 - 4 *p
+#qt = 10 + 6*p
+
+def finn_likevekt(qe, qt,p):
+    likevekt_pris = sp.solve(sp.Eq(qe,qt),p)[0]
+    likevekt_mengde = qt.subs(p, likevekt_pris)
+    return likevekt_pris , likevekt_mengde
+
+
+finn_likevekt(qe,qt,p)
+```
+
+
+##  Logikk og løkker
+
+### Oppgave 1: Rabatt på Kjøp
+En butikk gir 10% rabatt hvis kunden handler for mer enn 1000 kr.
+
+Skriv en kode som tar inn en totalpris og sjekker om kunden får rabatt eller ikke.
+
+
+### Oppgave 2: Lånesøknadsgodkjenning
+En bank godkjenner lån dersom kunden tjener minst $500,000$ kr i året og ikke har betalingsanmerkninger.
+
+Lag en `if`/`else` setning, som tar inn `inntekt` og `betalingsanmerkning` ("ja" eller "nei").
+
+
+## Eksempler oppgave 1 og 2
+Sjekk om du har nok penger
+```{.python}
+penger = 150
+if penger >= 100:
+    print("Du kan kjøpe lunch i kantina")
+else:
+    print("Du har ikke nok penger til lunch i kantina")
+```
+
+Du må være medlem for å slippe inn i kantina. 
+
+```{.python}
+penger = 150
+medlem = True
+
+if penger >= 100 and medlem:
+    print("Du kan kjøpe lunch i kantina")
+elif penger >= 100 and not medlem:
+    print("Du må være medlem for å kjøpe lunch i kantina")
+else:
+    print("Du har ikke nok penger til lunch i kantina")
+```
+
+
+
+
+## 
+
+### Oppgave 1 LF
+
+```{.python}
+# Brukerens kjøpsbeløp
+totalpris = 1500
+
+# Sjekk om rabatt gjelder
+if totalpris > 1000: #Legg merke til > istedet for >= i eksempelet
+    ny_pris = totalpris * 0.9  # 10% rabatt
+    print(f"Du får 10% rabatt! Ny pris: {ny_pris:.2f} kr")
+else:
+    print(f"Ingen rabatt gitt. Totalpris: {totalpris:.2f} kr")
+```
+### Oppgave 2 LF
+
+```{.python}
+# Kundeinformasjon
+inntekt = 510000                # Eksempel-lønn
+betalingsanmerkning = "nei"     # "nei" eller "ja"
+
+# Sjekk lånekriterier
+if inntekt >= 300000 and betalingsanmerkning == "nei":
+    print("Lån innvilget!")
+else:
+    print("Beklager, du oppfyller ikke kravene for lån.")
+```
+
+
+
+
+
+
+
+
+
+
+## Oppgave 4: Skatteberegning med If/Else
+En person må betale skatt basert på følgende inntektsnivå:
+
+* Under **200,000 kr**: **0% skatt**
+* Mellom **200,000 kr** - **500,000 kr**: **20% skatt**
+* Over **500,000 kr**: **35% skatt**
+
+Lag en `if`/`elif`/`else` setning, som tar inn `inntekt` og beregner hvor mye man må betale i skatt.
+
+
+
+
+
+## Oppgave 4 lf 
+
+```{.python}
+# Brukerinput
+inntekt = 600000
+
+# Beregn skatt basert på inntekten
+if inntekt < 200000:
+    skatt = 0
+elif inntekt <= 500000:
+    skatt = inntekt * 0.20
+else:
+    skatt = inntekt * 0.35
+
+print(f"Du må betale {skatt:.2f} kr i skatt.")
+```
+
+$$
+\text{Skatt} =
+\begin{cases}
+0 & \text{hvis } \text{Inntekt} < 200000 \\
+0.20 \cdot \text{Inntekt} & \text{hvis } 200000 \leq \text{Inntekt} \leq 500000 \\
+0.35 \cdot \text{Inntekt} & \text{hvis } \text{Inntekt} > 500000
+\end{cases}
+$$
+
+
+
+
+
+
+
+## Oppgave 6: Sparing med While-løkke
+En person starter med $0$ kr på en sparekonto og setter inn $900$ kr per måned.
+
+Skriv en while-løkke som beregner hvor mange måneder det tar å spare opp $50,000$ kr.
+
+
+
+
+
+## Oppgave 6 LF
+
+```{.python}
+# Startverdi
+saldo = 0
+månedlig_sparing = 900
+mål = 50000
+måneder = 0
+
+# While-løkke for å beregne sparing
+while saldo < mål:
+    saldo += månedlig_sparing
+    måneder += 1
+
+print(f"Etter {måneder} måneder har du spart opp {saldo} kr!")
+```
+
+
+
+
+
+
+
+## Oppgave 7: Budsjettkontroll med For-løkke og If
+En person har ført utgifter de siste månedene, og ser slik ut:
+```utgifter = [12000, 8500, 10000, 13000, 7500, 11000]```
+
+Skriv en `for`-løkke som sjekker hvor mange måneder personen brukte mer enn $10,000$ kr.
+
+Hint: Her vil du fort få bruk for både `for`-løkke og en `if` betingelse.
+
+
+
+
+
+## Oppgave 7 LF
+
+```{.python}
+# Liste med utgifter
+utgifter = [12000, 8500, 10000, 13000, 7500, 11000]
+grense = 10000
+over_budsjett = 0
+
+# Løkke for å telle måneder over budsjett
+for utgift in utgifter: 
+    if utgift > grense:
+        over_budsjett += 1
+
+print(f"Antall måneder over budsjettet: {over_budsjett}")
+```
+```{python}
+# Liste med utgifter
+utgifter = [12000, 8500, 10000, 13000, 7500, 11000]
+grense = 10000
+over_budsjett = 0
+
+# Løkke for å telle måneder over budsjett
+for utgift in utgifter: 
+    if utgift > grense:
+        over_budsjett += 1
+
+print(f"Antall måneder over budsjettet: {over_budsjett}")
+```
+
+
+
+
+## Oppgave 8: Sparing og Økonomiske Beslutninger
+En person ønsker å spare opp $100,000$ kr til egenkapital mot boligkjøp. Hver måned setter de inn et fast beløp på kontoen sin.
+Du skal lage et program som:
+
+* Ber brukeren skrive inn hvor mye de vil spare per måned.
+* Bruker en while-løkke for å beregne hvor mange måneder det tar å nå $100,000$ kr.
+* Bruker en for-løkke for å skrive ut saldoen for hver måned.
+* Bruker if/elif/else for å gi forskjellige meldinger underveis basert på saldoen.
+* Legger alt i en funksjon, slik at vi kan kalle `sparing()` for å kjøre programmet.
+
+
+##  LF1
+```{.python}
+def sparing(sparemål, saldo, måneder):
+    # Brukerinput: månedlig sparing - input vil komme opp øverst på skjermen
+    månedlig_sparing = float(input("Hvor mye vil du spare per måned? "))
+
+    # While-løkke for å beregne sparing hvor mye penger spart
+    while saldo < sparemål:
+        måneder += 1
+        saldo += månedlig_sparing
+
+        # If/elif/else for statusmeldinger underveis i spareprosessen :)
+        if saldo >= 100000:
+            print(f"Måned {måneder}: Du har spart {saldo:.2f} kr! Målet er nådd!")
+        elif saldo >= 50000:
+            print(f"Måned {måneder}: Du har spart {saldo:.2f} kr! Halvveis der!")
+        elif saldo >= 25000:
+            print(f"Måned {måneder}: Du har spart {saldo:.2f} kr! God start!")
+        else:
+            print(f"Måned {måneder}: Sparte {månedlig_sparing} kr, saldo: {saldo:.2f} kr")
+
+    print(f"Gratulerer! Du har nådd sparemålet på {sparemål} kr etter {måneder} måneder!")
+
+# Kjør funksjonenen vi har lagd
+sparing(100000, 0, 0)
+```
+
+## LF2
+ 
+```{.python}
+def sparing():
+    # Sparemål og startverdi
+    sparemål = 100000       # Sparemål fra oppgavetekst
+    saldo = 0               # må initieres med "0"
+    måneder = 0             # må initieres med "0"
+
+    # Brukerinput: månedlig sparing - input vil komme opp øverst på skjermen
+    månedlig_sparing = float(input("Hvor mye vil du spare per måned? "))
+
+    # While-løkke for å beregne sparing hvor mye penger spart
+    while saldo < sparemål:
+        måneder += 1
+        saldo += månedlig_sparing
+
+        # If/elif/else for statusmeldinger underveis i spareprosessen :)
+        if saldo >= 100000:
+            print(f"Måned {måneder}: Du har spart {saldo:.2f} kr! Målet er nådd!")
+        elif saldo >= 50000:
+            print(f"Måned {måneder}: Du har spart {saldo:.2f} kr! Halvveis der!")
+        elif saldo >= 25000:
+            print(f"Måned {måneder}: Du har spart {saldo:.2f} kr! God start!")
+        else:
+            print(f"Måned {måneder}: Sparte {månedlig_sparing} kr, saldo: {saldo:.2f} kr")
+
+    print(f"Gratulerer! Du har nådd sparemålet på {sparemål} kr etter {måneder} måneder!")
+
+# Kjør funksjonenen vi har lagd
+sparing()
+```

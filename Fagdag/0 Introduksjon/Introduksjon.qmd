@@ -69,7 +69,7 @@ format:
 
 - Filene dere trenger kan lastes ned her:
 
-[https://github.com/DanielFabioG/BED-1304](https://github.com/DanielFabioG/BED-1304)
+[https://uit-bed-1304-h26.github.io/forelesningsplan.html](https://uit-bed-1304-h26.github.io/forelesningsplan.html)
 
 ::: {.incremental}
 
